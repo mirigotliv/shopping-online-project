@@ -1,0 +1,64 @@
+.mainDiv {
+    border: 3px solid red;
+    display: flex;
+    height: 555px;
+    margin-left: 20%;
+    width: 480px;
+}
+
+.childDiv {
+    margin-left: 50px;
+}
+
+.stepPassage {
+    font-size: 17px;
+    margin-left: 40px;
+    margin-top: 10px;
+}
+
+label {
+    font-size: 23px;
+}
+
+.idLabel {
+    margin-left: 15px;
+}
+
+.emailLabel {
+    margin-left: 14px;
+}
+
+.passwordLabel {
+    margin-left: 14px;
+}
+
+.confirmPasswordLabel {
+    margin-left: 8px;
+}
+
+input {
+    color: blue;
+    height: 35px;
+    width: 300px;
+    border: 3px solid blue;
+    font-size: 20px;
+}
+
+.backToLogin {
+    margin-top: 20px;
+    padding: 6px;
+    margin-left: 50px;
+    font-size: 17px;
+}
+
+.backToLogin:hover,
+.nextButton:hover {
+    background-color: rgb(192, 221, 255);
+}
+
+.nextButton {
+    margin-left: 60px;
+    padding: 6px;
+    width: 25%;
+    font-size: 17px;
+}

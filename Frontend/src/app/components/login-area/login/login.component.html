@@ -1,0 +1,44 @@
+<div>
+
+    <div>
+        <form (submit)="send()">
+
+            <a class="btn btn-primary btn-lg shoppingLink"
+                routerlink="/shopping">Start
+                Shopping</a>
+                
+            <p class="registerPassage">Registered?</p>
+
+            <div class="emailDiv">
+                <label class="emailLabel">Email:</label>
+                <input class="emailInput" type="email" [(ngModel)]="login.email" #emailBox="ngModel" required autofocus
+                    placeholder="Email">
+                <span *ngIf="emailBox.invalid && emailBox.touched">Missing email</span>
+            </div>
+
+
+            <div class="passwordDiv">
+                <label class="passwordLabel">Password:</label>
+                <input class="passwordInput" type="password" [(ngModel)]="login.password" #passwordBox="ngModel"
+                    required placeholder="Password">
+                <span *ngIf="passwordBox.invalid && passwordBox.touched">Missing email</span>
+            </div>
+
+
+            <div>
+                <button>login</button>
+                <a class="linkToRegister" routerLink="/register">Sign Up</a>
+            </div>
+
+        </form>
+    </div>
+
+    <div>
+        <app-about-us></app-about-us>
+    </div>
+
+    <div>
+        <app-total-quantity></app-total-quantity>
+    </div>
+
+</div>

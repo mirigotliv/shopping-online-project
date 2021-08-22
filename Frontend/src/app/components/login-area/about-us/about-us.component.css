@@ -1,0 +1,31 @@
+
+.divAboutUs {
+    flex-direction: row;
+    grid-template-rows: 1fr;
+    justify-content: center;
+    width: 480px;
+    height: 555px;
+    display: grid;
+    border: 3px solid red;
+}
+
+
+.questionPassage {
+    color: blue;
+    font-weight: bold;
+    font-size: 30px;
+    margin-left: 25px;
+}
+
+.descriptionAboutUs {
+  margin-top: 3px;
+  margin-left: 19px;
+  font-size: 16px;
+}
+
+img {
+    height: 140px;
+    margin-left: 82px; 
+    margin-top: 20px;
+    width: 300px;
+}

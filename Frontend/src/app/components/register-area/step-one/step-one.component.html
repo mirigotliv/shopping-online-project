@@ -1,0 +1,38 @@
+<div class="mainDiv">
+
+    <div class="childDiv">
+        <form>
+            <p class="stepPassage">Sign Up - "STEP 1"</p>
+
+            <label class="idLabel">ID:</label>
+            <br />
+            <input class="idInput" type="text" autofocus placeholder="identify" name="identify" required>
+            <br /> <br /><br />
+
+            <label class="emailLabel">Email:</label>
+            <input class="emailInput" type="email" autofocus placeholder="email" name="email" required>
+            <br /> <br /> <br />
+
+            <label class="passwordLabel">Password:</label>
+            <input class="passwordInput" type="password" placeholder="password" name="password" required>
+            <br /> <br /> <br />
+
+            <label class="confirmPasswordLabel">Confirm Password:</label>
+            <input class="confirmPasswordInput" type="password" placeholder="confirm password" name="password" required>
+
+            <button class="backToLogin" routerLink="/login">
+                Back to login
+            </button>
+
+            <button class="nextButton">
+                Next
+            </button>
+
+        </form>
+    </div>
+
+    <!-- <div class="childDiv"> -->
+    <app-step-two></app-step-two>
+    <!-- </div> -->
+
+</div>

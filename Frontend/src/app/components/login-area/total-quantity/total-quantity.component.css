@@ -1,0 +1,23 @@
+.mainDiv{
+    border: 3px solid red;
+    display: flex;
+    flex-direction: row;
+    grid-template-rows: 1fr;
+    height: 555px;
+    width: 480px;
+}
+
+.divTotalQuantity {
+    font-size: 25px;
+    margin-left: 7px;
+    margin-top: 50px;
+    text-align: center;
+}
+
+
+p {
+    color: blue;
+    font-weight: bold;
+}
+
+

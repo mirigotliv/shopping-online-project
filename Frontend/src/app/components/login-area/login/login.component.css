@@ -1,0 +1,89 @@
+div {
+    display: flex;
+    flex-direction: row;
+    grid-template-rows: 1fr;
+    height: 100%;
+    justify-content: center;
+    padding: 5px;
+    width: 100%;
+}
+
+form {
+    border: 3px solid red;
+    display: grid;
+    height: 555px;
+    justify-content: center;
+    margin-bottom: 0;
+    position: relative;
+    width: 480px;
+}
+
+.shoppingLink {
+    background-color: #333;
+    font-size: 20px;
+    height: 40px;
+    margin-left: 50px;
+    margin-top: 30px;
+    padding: 3px;
+    text-align: center;
+    width: 180px;
+}
+
+.registerPassage {
+    font-size: 25px;
+    font-weight: bold;
+    margin-left: 15px;
+    margin-top: 2px;
+}
+
+label {
+    color: blue;
+    font-size: 23px;
+    margin-top: 5px;
+}
+
+.emailLabel {
+    margin-left: 28px;
+}
+
+input {
+    border: 3px solid blue;
+    color: blue;
+    font-size: 20px;
+    height: 35px;
+    width: 300px;
+}
+
+.emailInput,
+.passwordInput {
+    margin-left: 14px;
+}
+
+.registerPassage {
+    font-size: 25px;
+    font-weight: bold;
+    margin-top: 0px 2px 2px;
+    margin-top: 2px;
+}
+
+.passwordDiv {
+    margin-left: 0px;
+}
+
+button {
+    font-size: 25px;
+    height: 38px;
+    margin-top: 3px;
+    width: 35%;
+}
+
+.linkToRegister {
+    display: inline-block;
+    font-size: 28px;
+    margin-left: 20px;
+    margin-top: 12px;
+}
+
+.linkToRegister :hover {
+    color: red;
+}
