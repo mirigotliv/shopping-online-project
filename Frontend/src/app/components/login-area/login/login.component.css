@@ -1,23 +1,23 @@
-div {
+/* style to main div of Login  */
+.mainDivLogin {
     display: flex;
-    flex-direction: row;
-    grid-template-rows: 1fr;
-    height: 100%;
+    grid-template-rows: 1fr; 
     justify-content: center;
-    padding: 5px;
     width: 100%;
 }
 
+/* style to form of login */
 form {
     border: 3px solid red;
     display: grid;
-    height: 555px;
+    width: 550px;
+    height: 605px;
     justify-content: center;
     margin-bottom: 0;
-    position: relative;
-    width: 480px;
+    margin-left: 40px;
 }
 
+/* "Start Shopping" - link to shopping page */
 .shoppingLink {
     background-color: #333;
     font-size: 20px;
@@ -29,47 +29,68 @@ form {
     width: 180px;
 }
 
+/* question to user-"Registered?" */
 .registerPassage {
     font-size: 25px;
     font-weight: bold;
-    margin-left: 15px;
-    margin-top: 2px;
+    margin-left: 45px;
+    margin-top: 20px;
 }
 
+/* style to label of email + password: */
 label {
     color: blue;
     font-size: 23px;
-    margin-top: 5px;
+    margin-left: 5px;
 }
 
+/* style to label of email: */
 .emailLabel {
-    margin-left: 28px;
+    margin-left: 5px;
 }
 
+/* style to div of email + password: */
+.form-group {
+    align-items: center;
+}
+
+/* style to div of password: */
+#passwordDiv {
+    margin-left: 0px;
+}
+
+/* style to label of password: */
+.passwordLabel {
+    margin-left: 5px;
+}
+
+/* style to input: */
 input {
     border: 3px solid blue;
     color: blue;
     font-size: 20px;
     height: 35px;
-    width: 300px;
+    width: 270px;
 }
 
-.emailInput,
+/* style to password input: */
 .passwordInput {
-    margin-left: 14px;
+    margin-left: 4px;
 }
 
-.registerPassage {
-    font-size: 25px;
-    font-weight: bold;
-    margin-top: 0px 2px 2px;
-    margin-top: 2px;
+/* style to each error - message to user under the input: */
+.invalid-feedback {
+   color: brown;
+   font-size: 18px;
 }
 
-.passwordDiv {
-    margin-left: 0px;
+/* style to error of email: */
+#invalidEmailMessage {
+    color: rgb(109, 100, 237);
+    margin-left: 12px;
 }
 
+/* style to button- "Login": */
 button {
     font-size: 25px;
     height: 38px;
@@ -77,6 +98,12 @@ button {
     width: 35%;
 }
 
+/* style to button- "Login" when you hover on this button: */
+button:hover {
+    background-color: rgb(192, 221, 255);
+}
+
+/* style to "Sign Up" link: */
 .linkToRegister {
     display: inline-block;
     font-size: 28px;
@@ -84,6 +111,22 @@ button {
     margin-top: 12px;
 }
 
+/* style to "Sign Up" link when you hover on this link: */
 .linkToRegister :hover {
     color: red;
+}
+
+/* style to "eye" icon and input of password together:  */
+#visibilityDiv {
+    display: flex;
+}
+
+/* style to "eye" icon:  */
+.material-icons {
+    margin-left: 5px;
+}
+
+.wrongMessage {
+    color: rgb(255, 60, 0);
+    font-size: 18px;
 }

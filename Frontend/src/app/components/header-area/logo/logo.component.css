@@ -3,6 +3,10 @@ img {
     margin-left: 20px;
 }
 
-div {
-    display: inline-flex;
+.mainDiv {
+    display: flex;
+}
+
+.contactUs {
+    margin-left: 40%;
 }

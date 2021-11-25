@@ -1,14 +1,14 @@
-const orderLogic = require('../business-logic-layer/orders-logic');
-const router = require('express').Router();
+const orderLogic = require('.././business-logic-layer/orders-logic'),
+    router = require('express').Router()
 
-//הוספת הזמנה
-router.post('/', async (reqest, response) => {
+// Add order:
+router.post('/api/orders', async (request, response) => {
     try {
-        response.status(201).json(await orderLogic.addOrder(reqest.body));
+        response.status(201).json(await orderLogic.addOrderAsync(request.body))
     }
-    catch (err) { 
-        return response.status(500).send(err.message) }
-});
+    catch (error) {
+        response.status(500).send(error.message)
+    }
+})
 
-
-module.exports = router;
+module.exports = router

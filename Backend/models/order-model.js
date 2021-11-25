@@ -1,17 +1,39 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const orderSchema = mongoose.Schema({
-    customer: { type: mongoose.Schema.Types.ObjectId, ref: "Customer" },
-    cart: { type: mongoose.Schema.Types.Mixed, ref: 'Cart' },
-    address: { type: mongoose.Schema.Types.Mixed, ref: 'Address' },
-    orderDate: {},
-    cc: {
-        number: String,
-        expiration: { month: String, year: String },
-        cvv: String
+const OrdersSchema = mongoose.Schema({
+    cityName: {
+        type: String,
+        required: [true, "Missing city name"],
+        minlength: [2, "Name must be minimum 2 chars"],
+        maxlength: [100, "Name can't exceed 100 chars"]
+    },
+    street: {
+        type: String,
+        required: [true, "Missing street"],
+        min: [0, "street can't be negative"],
+        max: [1000, "street can't exceed 1000"]
+    },
+    shippingDate: {
+        type: Date,
+        required: [true, "Missing date of shipping"],
+    },
+    creditCard: {
+        type: Number,
+        required: [true, "Missing creditCard"],
+        min: [1000, "credit card must be min 4"]
+    },
+    userId: {
+        type: mongoose.Schema.Types.ObjectId
     }
-}, { versionKey: false });
+}, { versionKey: false, toJSON: { virtuals: true }, id: false });
 
-const Order = mongoose.model('Order', orderSchema, 'orders');
+OrdersSchema.virtual("user", {
+    ref: "UserModel",
+    localField: "userId",
+    foreignField: "_id",
+    justOne: true
+});
 
-module.exports = Order;
+const OrderModel = mongoose.model("OrderModel", OrdersSchema, "orders");
+
+module.exports = OrderModel;

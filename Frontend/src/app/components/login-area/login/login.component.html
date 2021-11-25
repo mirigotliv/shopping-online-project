@@ -1,44 +1,133 @@
-<div>
+<div class="mainDivLogin">
+    <form 
+        [formGroup]="loginForm"
+        (ngSubmit)="onSubmit()">
+      <!-- <a
+        class="btn btn-primary btn-lg shoppingLink"
+        routerLink="/shopping">
+          Start Shopping
+      </a> -->
+      <p class="registerPassage">
+         Registered?
+      </p>
 
-    <div>
-        <form (submit)="send()">
-
-            <a class="btn btn-primary btn-lg shoppingLink"
-                routerlink="/shopping">Start
-                Shopping</a>
-                
-            <p class="registerPassage">Registered?</p>
-
-            <div class="emailDiv">
-                <label class="emailLabel">Email:</label>
-                <input class="emailInput" type="email" [(ngModel)]="login.email" #emailBox="ngModel" required autofocus
-                    placeholder="Email">
-                <span *ngIf="emailBox.invalid && emailBox.touched">Missing email</span>
-            </div>
-
-
-            <div class="passwordDiv">
-                <label class="passwordLabel">Password:</label>
-                <input class="passwordInput" type="password" [(ngModel)]="login.password" #passwordBox="ngModel"
-                    required placeholder="Password">
-                <span *ngIf="passwordBox.invalid && passwordBox.touched">Missing email</span>
-            </div>
-
-
-            <div>
-                <button>login</button>
-                <a class="linkToRegister" routerLink="/register">Sign Up</a>
-            </div>
-
-        </form>
-    </div>
-
-    <div>
-        <app-about-us></app-about-us>
-    </div>
-
-    <div>
-        <app-total-quantity></app-total-quantity>
-    </div>
-
+    <!-- email div- with label, input, and messages to user: -->
+    <div class="form-group">
+        <label class="emailLabel"> Username: </label>
+        <input
+              class="emailInput"
+              #email type="text"
+              name="username"
+              required 
+              autofocus
+              placeholder="username"
+              pattern="^(\w|\W)+@\w+\.(\w|\.)+$"
+              formControlName="email"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && form.email.errors }">
+            
+               <!-- div for display error to user when he enters wrong data in email input -->
+        <div
+            *ngIf="submitted && form.email.errors"
+            class="invalid-feedback"
+        >
+            <!-- first message: -->
+        <span *ngIf="form.email.errors.required">
+               email is required
+        </span>
+            <!-- second message: -->
+        <span *ngIf="form.email.errors.minlength">
+                email must be at least 11 characters
+        </span>
+            <!-- third message: -->
+        <div
+            id="invalidEmailMessage"
+            *ngIf="form.email.errors"
+        >
+            invalid email (check- email with @ , totally 11 characters)
+        </div>
+        </div>
 </div>
+
+        <!-- password div- with label, input, and messages to user: -->
+        <div
+            id="passwordDiv"
+            class="form-group">
+          <label 
+                class="passwordLabel"
+          >
+                Password:
+          </label>
+            <div id="visibilityDiv">
+             <input
+                   [type]="passwordType"
+                   class="passwordInput"
+                   type="password"
+                   name="password"
+                   id="password"
+                   #password
+                   required
+                   placeholder="password" 
+                   formControlName="password" 
+                   class="form-control"
+                   [ngClass]="{ 'is-invalid': submitted && form.password.errors }"
+             >
+            <!-- "eye" icon -helping to user see the password value: -->
+             <span 
+                class="material-icons"
+                visibility
+                (click)="togglePassword()"
+             >
+                visibility
+             </span>
+            </div>
+          <!-- div for display error to user when he enters wrong data in email input -->
+            <div
+                *ngIf="submitted && form.password.errors"
+                class="invalid-feedback"
+            >
+            <!-- first message: -->
+                <span
+                     *ngIf="form.password.errors.required"
+                >
+                     password is required
+                </span>
+            <!-- second message: -->
+                <span
+                     *ngIf="form.password.errors.minlength"
+                >
+                     password must be at least 5 characters
+                </span>
+            </div>
+        </div>
+
+        <!-- message error to user-"incorrect email"
+                 or "incorrect password" -->
+       <div class="wrongMessage">
+             {{wrongMessage}}
+        </div>
+
+        <div>
+            <!-- "Login" button- to pass to "shopping" page -->
+            <button
+               (click)="onLogin(email.value, password.value)"
+               ng-click="controller.login(user)"
+            >
+                Login
+            </button>
+
+            {{form.message}}
+            <a class="linkToRegister"
+               routerLink="/register"
+            >
+               Sign Up
+            </a>
+        </div>
+    </form>
+
+      <!-- component about us- explain "Why you should buy in our store"? -->
+      <app-about-us></app-about-us>
+      
+      <!-- component total-quantity- describe number
+           of products the users purchased until now: -->
+      <app-total-quantity></app-total-quantity>

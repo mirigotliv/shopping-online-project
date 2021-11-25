@@ -1,15 +1,23 @@
-
+/* main div: */
 .divAboutUs {
+    border: 3px solid red;
     flex-direction: row;
     grid-template-rows: 1fr;
+    height: 605px;
     justify-content: center;
-    width: 480px;
-    height: 555px;
-    display: grid;
-    border: 3px solid red;
+    margin-left: 30px;
+    width: 430px;
 }
 
+/* image of cart in shop: */
+img {
+    height: 140px;
+    margin-left: 82px; 
+    margin-top: 20px;
+    width: 300px;
+}
 
+/* passage of question:"Why you should buy in our store?": */
 .questionPassage {
     color: blue;
     font-weight: bold;
@@ -17,15 +25,10 @@
     margin-left: 25px;
 }
 
+/* div of lines data: */
 .descriptionAboutUs {
-  margin-top: 3px;
-  margin-left: 19px;
-  font-size: 16px;
+    font-size: 16px;
+    margin-left: 19px;
+    margin-top: 3px;
 }
 
-img {
-    height: 140px;
-    margin-left: 82px; 
-    margin-top: 20px;
-    width: 300px;
-}

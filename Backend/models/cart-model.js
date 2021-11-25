@@ -1,16 +1,19 @@
-const mongoose = require('mongoose');
-const cartSchema = mongoose.Schema({
-    customer: { type: mongoose.Schema.Types.ObjectId, ref: "Customer" },
-    date: Date,
-    cartProducts: [{
-        product: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },
-        quant: Number,
-        totalPrice: Number
-    }],
-    overallPrice: Number,
-    active: Boolean
-}, { versionKey: false });
-const Cart = mongoose.model('Cart', cartSchema, 'carts');
+const mongoose = require("mongoose");
 
+const CartSchema = mongoose.Schema({
+    cartId: Number,
+    dateCreationCart: Date,
+    userId: mongoose.Schema.Types.ObjectId
+},
+    { versionKey: false, toJSON: { virtuals: true }, id: false });
 
-module.exports = Cart;
+CartSchema.virtual("user", {
+    ref: "UserModel",
+    localField: "userId",
+    foreignField: "_id",
+    justOne: true
+});
+
+const CartModel = mongoose.model("CartModel", CartSchema, "carts");
+
+module.exports = CartModel;

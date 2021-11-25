@@ -1,32 +1,70 @@
-<div class="mainDiv">
-    <div class="childDiv">
-        <form>
+<!-- register-step 2: -->
+    <div class="divStep2">
+        <form
+         [formGroup]="registerForm"
+         id="formData"
+         #userData="ngForm"
+        >
+        <!-- (ngSubmit)="registerUser(userData.value)"  -->
+        <!-- (ngSubmit)="onSubmit()" -->
 
-            <p class="stepPassage">Sign Up - "STEP 2"</p>
+            <p>Sign in - step 2 </p>
 
-            <label class="cityLabel">City:</label>
+            <label class="labelStep2">City:</label>
+            <select formControlName="city" autocomplete placeholder='city' id="city" #city required class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.city.errors }">
+                <!-- <option disabled selected> select city </option> -->
+                <option value="" disabled="disabled">select city</option>
+                <option *ngFor="let city of cities" value="{{city._id}}">{{city.cityName}}</option>
+            </select>
+            <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+                <div *ngIf="f.city.errors.required">city is required</div>
+                <div *ngIf="f.city.errors.minlength">city must be at least 5 characters</div>
+            </div>
             <br />
-            <input class="cityInput" type="text" required autofocus placeholder="City">
-            <br /> <br /><br />
 
-            <label class="streetLabel">Street:</label>
+            <label class="labelStep2">Street:</label>
+            <input placeholder='street' id="street" #street required formControlName="street" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.street.errors }" />
+            <div *ngIf="submitted && f.street.errors" class="invalid-feedback">
+                <div *ngIf="f.street.errors.required">street is required</div>
+                <div *ngIf="f.street.errors.minlength">street must be at least 5 characters</div>
+            </div>
             <br />
-            <input class="streetInput" type="text" required autofocus placeholder="Street">
-            <br /> <br /><br />
 
-            <label class="nameLabel">Name:</label>
+            <label class="labelStep2">Name:</label>
+            <input placeholder="firstName" id="firstName" #name required formControlName="firstName" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+            <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                <div *ngIf="f.firstName.errors.required">first name is required</div>
+                <div *ngIf="f.firstName.errors.minlength">first name must be at least 5 characters</div>
+            </div>
             <br />
-            <input class="nameInput" type="text" required autofocus placeholder="Name">
-            <br /> <br /><br />
 
-            <label class="lastNameLabel">Last Name:</label>
+            <label class="labelStep2">Last Name:</label>
+            <input placeholder="last name" id="lastName" #lastName required formControlName="lastName"
+                class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+            <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                <div *ngIf="f.lastName.errors.required">lastName is required</div>
+                <div *ngIf="f.lastName.errors.minlength">lastName must be at least 5 characters</div>
+            </div>
             <br />
-            <input class="iastNameInput" type="text" required autofocus placeholder="Last Name">
+            <!-- <button class="backToLogin">
+                Back to step 1
+            </button> -->
 
-            <button class="registerButton" routerLink="/login">
+            <button
+               (click)="onSubmit()"
+               value="Register"
+               class="registerButton"
+               >
                 Register
             </button>
+            <!-- (click)="signUp(
+                    city.value,
+                    street.value,
+                    name.value, 
+                    lastName.value
+            )" -->
         </form>
-
     </div>
-</div>

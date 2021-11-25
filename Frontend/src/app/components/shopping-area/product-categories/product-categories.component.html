@@ -1,0 +1,65 @@
+<app-search-product></app-search-product>
+
+<div class="mainDiv">
+        <!-- add cart component- in sidebar: -->
+    <app-cart></app-cart>
+        <!-- div of categories name: -->
+    <div class="divProducts">
+        <a
+          id="categoriesName"
+          *ngFor="let category of categories"
+          (click)="productsByCategory(category._id)">
+           <p>
+               {{category.categoryName}}
+           </p>
+        </a>
+
+         <!-- div of products in cards: -->
+        <div class="mainDiv">
+            <app-product-card
+              class="cards" 
+              (click)="openModal()"
+              *ngFor="let product of products" [product]="product">
+            </app-product-card>
+        </div>
+    </div>
+</div>
+
+    <!-- div that display when the user "click" on each card of product -->
+    <div
+        class="modal"
+        [ngStyle]="{'display':display}"
+    >
+    <div class="modal-content">
+        <h4 class="modal-title">
+          choose amount you want from this product:
+        </h4>
+        <button
+             type="button"
+             class="close"
+             (click)="onCloseHandled()"
+        >
+        </button>
+
+        <div id="divNumber">
+            <button id="buttonAddNum" (click)="addNum()">
+                <p>+</p>
+            </button>
+            <div class="divCounter">{{count}}</div>
+        </div>
+        <!-- button-"reset mount" -->
+        <button id="resetMountButton" (click)="reset()">
+            <p>reset mount</p>
+        </button>
+        <!-- button-"cancel" -->
+        <button id="closeModalButton" type="button" (click)="onCloseHandled()">cancel</button>
+        <!-- button-"add" -->
+        <button
+        (click)="addProduct()"
+        id="addProduct"
+        >
+        add
+        </button>
+
+    </div>
+</div>

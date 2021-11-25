@@ -1,0 +1,19 @@
+.mainDiv {
+    display: flex;
+}
+
+img {
+    height: 300px;
+    width: 300px;
+    margin-left: 100px;
+    margin-top: 80px;
+    border-radius: 25px;
+}
+
+a {
+    margin-left: 10px;
+}
+
+.cc {
+    margin-top: 50px;
+}

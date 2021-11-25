@@ -1,0 +1,32 @@
+.mainDiv {
+    height: 600px;
+    width: 390px;
+    border: 2px solid blue;
+    margin-left: 14%;
+    margin-bottom: 30px;
+    /* display: inline-block; */
+}
+
+p {
+    font-size: 25px;
+    font-weight: bold;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+hr {
+    margin-top: 2px;
+}
+
+.divOrderLink {
+    display: flex;
+    margin-top: 95%;
+}
+
+a {
+    font-size: 20px;
+    margin-left: 10px;
+    margin: 30px;
+    text-decoration: underline;
+}
+

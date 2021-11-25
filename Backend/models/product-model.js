@@ -1,12 +1,20 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const productSchema = mongoose.Schema({
-    name: String,
-    prodCategory: { type: mongoose.Schema.Types.ObjectId, ref: "ProdCategory" },
+const ProductSchema = mongoose.Schema({
+    productName: String,
     price: Number,
-}, { versionKey: false });
+    imageName: String,
+    categoryId: mongoose.Schema.Types.ObjectId
+},
+    { versionKey: false, toJSON: { virtuals: true }, id: false });
 
-const Product = mongoose.model('Product', productSchema, 'products');
+ProductSchema.virtual("category", {
+    ref: "CategoryModel",
+    localField: "categoryId",
+    foreignField: "_id",
+    justOne: true
+});
 
+const ProductModel = mongoose.model("ProductModel", ProductSchema, "products");
 
-module.exports = Product;
+module.exports = ProductModel;

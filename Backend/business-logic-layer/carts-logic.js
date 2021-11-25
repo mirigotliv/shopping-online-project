@@ -1,81 +1,27 @@
-const Cart = require('../models/cart-model');
+const CartModel = require('../models/cart-model')
 
-//קבלת עגלה אחת
-function getOneCart(_id) {
-    return new Promise((resolve, reject) => {
-        Cart.findOne({ customer: _id }).populate('cartProducts.product').exec((err, cart) => {
-            if (err) {
-                return reject(err)
-            }
-            resolve(cart);
-        });
-    });
+// Get one cart: 
+function getOneCartAsync() {
+    return CartModel.find().exec();
 }
 
-
-//הוספת עגלה
-function addCart(cart) {
-    return new Promise((resolve, reject) => {
-        Cart.findOne({ customer: cart.customer }).populate({
-            path: 'cartProducts.product', populate: {
-                path: 'product'
-            }
-        }).exec((err, foundCart) => {
-            if (err) {
-                return reject(err)
-            }
-            if (foundCart) {
-                foundCart.active ? resolve({ cart: foundCart, msg: "active" }) : resolve({ cart: foundCart, msg: "latest" });
-            }
-            else {
-                cart.active = true;
-                new Cart(cart).save((err, info) => {
-                    if (err) {
-                        return reject(err)
-                    }
-                    resolve({ cart: info, msg: "new" });
-                });
-            }
-        })
-    });
+// Add cart: 
+function addCartAsync(cart) {
+    return cart.save();
 }
 
-//עדכון עגלה
-function updateCart(cart) {
-    return new Promise((resolve, reject) => {
-        Cart.updateOne({ _id: cart._id }, { ...cart }, (err, info) => {
-            if (err) {
-                return reject(err)
-            }
-            resolve(info);
-        });
-    });
+function updateCartAsync(cart) {
+    const info = CartModel.updateOne({ _id: site._id }, cart).exec();
+    return info.n ? cart : null; // n = the number of documents updated.
 }
 
-//סגירת עגלה
-function closeCart(_id) {
-    return new Promise((resolve, reject) => {
-        Cart.updateOne({ _id: _id }, { active: false }, err => err ? reject(err) : resolve());
-    });
+// Delete cart: 
+function deleteCartAsync(_id) {
+    return CartModel.deleteOne({ _id }).exec();
 }
-
-
-//מחיקת עגלה
-function deleteCart(_id) {
-    return new Promise((resolve, reject) => {
-        Cart.deleteOne({ _id }, (err, info) => {
-            if (err) {
-                return reject(err)
-            }
-            resolve(info);
-        });
-    });
-}
-
 module.exports = {
-    getOneCart,
-    addCart,
-    updateCart,
-    closeCart,
-    deleteCart
-};
+    getOneCartAsync,
+    addCartAsync,
+    deleteCartAsync,
+    updateCartAsync
+}

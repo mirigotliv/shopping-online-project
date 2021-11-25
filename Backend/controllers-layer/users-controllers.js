@@ -1,33 +1,43 @@
-const router = require('express').Router(),
-const passport = require('passport'),
-const usersLogic = require('../business-logic-layer/users-logics');
+const router = require('express').Router()
+const usersLogic = require('../business-logic-layer/users-logic')
 
-
-router.put("/", async (reqest, response, next) => {
+//Login:
+router.post("/login", async (request, response) => {
+    console.log('ccc')
+    console.log('req', request.body)
     try {
-        const updatedUser = await usersLogic.updateUser(reqest.body);
-        if (reqest.body.admin) {
-            reqest.body = { username: updatedUser.username, password: reqest.body.user.password };
-            await passport.authenticate('login', (err, user, info) => {
-                if (err) return response.status(501).json(err);
-                if (info) return response.json(info);
-                else {
-                    reqest.logIn(user.user, async (err) => {
-                        // console.log(err)
-                        if (err) return response.status(501).json(err);
-                        reqest.session.loggedIn = true;
-                        await reqest.session.save(err => { if (err) return console.log(err); });
-                        return response.status(200).json(user);
-                    })
-                }
-            })(reqest, response, next)
-        }
-        else {
-            return response.status(200).json(updatedUser);
-        }
+        const email = request.body.email
+        const password = request.body.password
+
+        const status = await usersLogic.login(email, password);
+        console.log('status', status)
+        response.status(status).send('ssss')
     }
     catch (err) {
-        return response.status(500).send(err.message)
-    };
+        console.log(err)
+        response.status(500).send(err.message);
+    }
 });
-module.exports = router;
+
+router.post("/register", (request, response) => {
+
+    usersLogic.register(request, response)
+    // usersLogic.register(identity, email, password, passwordConfirm, city, lastName, firstName, street)
+
+    // async (request, response) => {
+    //     try {
+    //         // const identify = request.body.id
+    //         // const email = request.body.email
+    //         // const password = request.body.password
+    //         // const passwordConfirm = request.body.passwordConfirm
+    //         // const city = request.body.city
+    //         // const street = request.body.id
+    //         // const firstName = request.body.firstName
+    //         // const lastName = request.body.lastName
+    //     }
+    //     catch (error) {
+    //         console.log(error)
+    //     }
+})
+
+module.exports = router

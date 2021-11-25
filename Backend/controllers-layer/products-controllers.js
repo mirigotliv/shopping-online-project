@@ -1,121 +1,250 @@
-const prodCategoryLogic = require('../business-logic-layer/products-logic').prodCategoriesLogic,
-const productLogic = require('../business-logic-layer/products-logic').productLogic,
-const router = require('express').Router();
+const categoriesLogic = require('../business-logic-layer/products-logic');
+const productsLogic = require('../business-logic-layer/products-logic');
+const fs = require("fs");
+const express = require("express");
+const path = require("path");
+const router = express.Router();
+const citiesLogic = require('../business-logic-layer/cities-logic')
 
-
-//קבלת קטגוריות של מוצרים
-router.get('/categories', async (request, response) => {
+// GET all categories: http://localhost:3001/api/categories
+router.get("/categories", async (request, response) => {
     try {
-        const categories = await prodCategoryLogic.getAllCategories();
-        return response.status(200).json(categories);
+        const categories = await categoriesLogic.getAllCategoriesAsync();
+        response.json(categories);
     }
     catch (err) {
-        return response.status(500).send(err.message)
+        console.log(err)
+        response.status(500).send(err.message);
     }
-})
+});
 
-
-//קבלת מוצר ע''י הקטגוריה שלו
-router.post('/categories', async (request, response) => {
+// GET all cities: http://localhost:3001/api/cities
+router.get("/cities", async (request, response) => {
     try {
-        const newCategory = request.body;
-        const addedCategory = await prodCategoryLogic.addCategory(newCategory);
-        return response.status(200).json(addedCategory);
+        console.log('cities')
+        const cities = await citiesLogic.getAllCitiesAsync();
+        response.json(cities);
     }
     catch (err) {
-        return response.status(500).send(err.message)
+        console.log(err)
+        response.status(500).send(err.message);
     }
-})
+});
 
-
-// קבלת כל המוצרים
-router.get('/products', async (request, response) => {
+// GET all products: http://localhost:3001/api/products
+router.get("/getProducts", async (request, response) => {
+    console.log('bbb')
     try {
-        const products = await productLogic.getAllProducts();
-        return response.status(200).json(products);
+        const products = await productsLogic.getAllProductsAsync();
+        response.json(products);
     }
     catch (err) {
-        return response.status(500).send(err.message)
+        console.log(err)
+        response.status(500).send(err.message);
     }
 });
 
 
-//קבלת מוצרים ע''י הקטגוריה שלהם
-router.get('/categories/:category', async (request, response) => {
+// // GET all product per category: http://localhost:3001/api/products/by-category/:categoryId
+router.get("/products/by-category/:categoryId", async (request, response) => {
     try {
-        const category = request.params.category;
-        const products = await productLogic.getProductsByCategory(category);
-        return response.status(200).json(products);
+        const categoryId = request.params.categoryId;
+        const products = await productsLogic.getProductsByCategoryAsync(categoryId);
+        response.json(products);
     }
     catch (err) {
-        return response.status(500).send(err.message)
+        console.log(err)
+        response.status(500).send(err.message);
     }
 });
 
 
-//קבלת מוצר אחד
-router.get('/products/:_id', async (request, response) => {
+
+// POST add product: http://localhost:3001/api/products
+// router.post("/products", async (request, response) => {
+//     try {
+//         const product = new ProductModel(request.body);
+//         const addedProduct = await logic.addProductAsync(product);
+//         response.status(201).json(addedProduct);
+//     } catch (err) {
+//         console.log(err)
+//         response.status(500).send(err.message);
+//     }
+// });
+
+
+router.get("/images/:name", (request, response) => {
     try {
-        const _id = request.params._id;
-        const product = await productLogic.getOneProduct(_id);
-        return response.status(200).json(product);
+        const name = request.params.name;
+
+        let absolutePath = path.join(__dirname, "..", "images", "products", name)
+        if (!fs.existSync(absolutePath)) {
+            absolutePath = path.join(__dirname, "..", "images", "images not found.jpg");
+        }
+        response.sendFile(absolutePath);
     }
     catch (err) {
-        return response.status(500).send(err.message)
+        console.log(err)
+        response.status(500).send(err.message);
     }
 });
 
+// -------------------------------------------------
 
-//חיפוש מוצרים
-router.get('/products/search/:val', async (request, response) => {
-    try {
-        const val = request.params.val;
-        const products = await productLogic.getSearchResults(val);
-        return response.status(200).json(products);
-    }
-    catch (err) {
-        return response.status(500).send(err.message)
-    }
-});
+// const cart = require('../models/cart-model');
+// const user = require('../models/user-model');
+// const userMiddleware = require("./middlewares/user")
+
+// let init = (app) => {
+
+//     // Get all carts by user ID
+//     app.get("/api/carts/:userID", userMiddleware.middleware, (req, res) => {
+
+//         cart.CartModel.find({"userID":req.params.userID})
+//         .then(carts => {
+//             res.status(200).send(JSON.stringify({"carts":carts}));
+//         })
+//         .catch((e) => { res.status(400).send(e) });
+
+//     });
+
+//     // Get user active carts by user ID
+//     app.get("/api/activecarts/:userID", userMiddleware.middleware, (req, res) => {
+
+//         cart.CartModel.find({"userID":req.params.userID, "active":true})
+//         .then(carts => {
+//             res.status(200).send(JSON.stringify({"carts":carts}));
+//         })
+//         .catch((e) => { res.status(400).send(e) });
+
+//     });
+
+//     // Create new cart
+//     app.post("/api/carts", userMiddleware.middleware, (req, res) => {
+
+//             cart.CartModel.count({userID: req.body.userID, active:true})
+//                 .then(count => {
+
+//                     if(count > 0 ){
+
+//                         res.status(400).send("Failed to create new cart, user already have active cart!");
+
+//                     }else{
+
+//                         let newCart = new cart.CartModel(req.body);
+//                         newCart.save()
+//                             .then(() => {
+
+//                                 res.status(200).send(newCart)
+//                             })
+//                             .catch((e) => {
+
+//                                 res.status(400).send(e)
+//                             });
+
+//                     }
+
+//                 })
+//                 .catch(err => {
+
+//                     res.status(400).send(err)
+//                 });
 
 
-//הוספת מוצר
-router.post('/products', async (request, response) => {
-    try {
-        const newProduct = request.body;
-        const addedProduct = await productLogic.addProduct(newProduct);
-        return res.status(200).json(addedProduct);
-    }
-    catch (err) {
-        return response.status(500).send(err.message)
-    }
-})
+
+//     })
+
+//     // Update cart by ID
+
+//     app.put("/api/carts/:cartID", userMiddleware.middleware, (req, res) =>{
+
+//         cart.CartModel.findOne({_id: req.params.cartID})
+//         .then(cart => {
+
+//             cart.date = req.body.price;
+//             cart.active = req.body.active;
+
+//             cart.save();
+//             res.status(200).send(cart);
+//         })
+//         .catch(err => res.status(400).send(err));
+
+//     });
+
+//     // Delete cart by ID
+
+//     app.delete("/api/carts/:cartID", userMiddleware.middleware, (req, res) =>{
+
+//         cart.CartModel.deleteOne({_id: req.params.cartID})
+//         .then(() => {
+
+//             res.status(200).send("Deleted!");
+//         })
+//         .catch(err => res.status(400).send(err));
+
+//     });
+
+// }
+
+// module.exports = { init }
 
 
-//עדכון מוצר
-router.put('/products/:_id', async (request, response) => {
-    try {
-        const product = request.body;
-        const updatedProduct = await productLogic.updateProduct(product);
-        return response.status(200).json(updatedProduct);
-    }
-    catch (err) {
-        return response.status(500).send(err.message)
-    }
-})
+// // router.get('/products/:_id', async (request, response) => {
+// //     try {
+// //         const _id = request.params._id
+// //         const product = await productLogic.getOneProduct(_id)
+// //         return response.status(200).json(product)
+// //     }
+// //     catch (error) {
+// //         response.status(500).send(error.message)
+// //     }
+// // })
 
+// // router.get('/products/search/:val', async (request, response) => {
+// //     try {
+// //         const val = request.params.val
+// //         const products = await productLogic.getSearchResults(val)
+// //         return response.status(200).json(products)
+// //     }
+// //     catch (error) {
+// //         response.status(500).send(error.message)
+// //     }
+// // })
 
-//מחיקת מוצר
-router.delete('/products/:_id', async (request, response) => {
-    try {
-        const _id = request.params._id;
-        await productLogic.deleteProduct(_id);
-        return response.status(200);
-    }
-    catch (err) {
-        return response.status(500).send(err.message)
-    }
-})
+// //add product:
+// // router.post('/products', async (request, response) => {
+// //     try {
+// //         const newProduct = request.body
+// //         const addedProduct = await productLogic.addProduct(newProduct)
+// //         return response.status(200).json(addedProduct)
+// //     }
+// //     catch (error) {
+// //         response.status(500).send(error.message)
+// //     }
+// // })
 
+// //update product:
+// // router.put('/products/:_id', async (request, response) => {
+// //     try {
+// //         const product = request.body
+// //         const updatedProduct = await productLogic.updateProduct(product)
+// //         return response.status(200).json(updatedProduct)
+// //     }
+// //     catch (error) {
+// //         response.status(500).send(error.message)
+// //     }
+// // })
+
+// //delete product:
+// router.delete('/products/:_id', async (request, response) => {
+//     try {
+//         const _id = request.params._id
+//         await productLogic.deleteProduct(_id)
+//         return response.status(200)
+//     }
+//     catch (error) {
+//         response.status(500).send(error.message)
+//     }
+// })
 
 module.exports = router;

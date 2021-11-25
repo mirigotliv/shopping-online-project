@@ -1,23 +1,11 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
-
+const mongoose = require('mongoose')
 
 const adminSchema = mongoose.Schema({
-    firstName: String,
-    lastName: String,
     email: String,
-    username: String,
-    password: String
-}, { versionKey: false });
-adminSchema.statics.hashPassword = function hashPassword(password) {
-    return bcrypt.hashSync(password, 10);
-}
+    password: String,
+    
+}, { versionKey: false })
 
-adminSchema.methods.isValid = (password, hashedPassword) => {
-    return bcrypt.compareSync(password, hashedPassword);
-}
+const Admin = mongoose.model('Admin', adminSchema, 'admins')
 
-const Admin = mongoose.model('Admin', adminSchema, 'admins');
-
-
-module.exports = Admin;
+module.exports = Admin

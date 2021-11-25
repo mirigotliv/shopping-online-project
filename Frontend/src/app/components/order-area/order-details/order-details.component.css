@@ -1,0 +1,64 @@
+
+.mainDiv {
+    height: 600px;
+    width: 420px;
+    border: 1px solid black;
+    margin-left: 80px;
+    margin-bottom: 30px;
+    margin-top: 50px;
+}
+
+form {
+    justify-items: center;
+    font-size: 20px;
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+span {
+    font-size: 20px;
+    height: 20px;
+}
+
+label {
+    font-size: 23px;
+}
+
+button {
+    font-size: 25px;
+    height: 38px;
+    width: 35%;
+    /* margin-top: 100%; */
+}
+
+input{
+    height: 30px;
+    width: 60%;
+}
+
+.labelForm {
+    margin-top: 20px;
+}
+
+.invalid-feedback {
+    color: brown;
+}
+
+span {
+    text-decoration: underline;
+}
+
+/* disable user to enter string to input of "identify": */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+select, input {
+    font-size: large;
+    width: 80%;
+}
+
+
+

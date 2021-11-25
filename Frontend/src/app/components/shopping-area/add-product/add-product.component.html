@@ -1,0 +1,36 @@
+<!-- <h1> :add new product</h1>
+
+<div>
+
+    <form #myForm="ngForm" (submit)="addTask()">
+
+        <br>
+        <label>:תיאור המשימה </label>
+        <input #descriptionTaskBox="ngModel" type="text" [(ngModel)]="task.descriptionTask" name="descriptionTask"
+            required>
+        <span *ngIf="descriptionTaskBox.errors?.required && descriptionTaskBox.touched">חסר תיאור משימה</span>
+        <br> -->
+
+        <!-- <input #nameBox="ngModel" type="text" [(ngModel)]="product.name" name="name" required pattern="^[A-Z].*$">
+        <span *ngIf="nameBox.errors?.required && nameBox.touched">Missing name.</span>
+        <span *ngIf="nameBox.errors?.pattern && nameBox.touched">Name must start with a capital letter.</span -->
+<!-- 
+        <label>:תאריך </label>
+        <input #dateBox="ngModel" type="date" [(ngModel)]="task.date" name="date" required>
+        <span *ngIf="dateBox.errors?.required && dateBox.touched">חסר תאריך למשימה</span>
+        <br>
+
+
+        <label>:בן משפחה </label>
+        <select #nameOfMemberBox="ngModel" [(ngModel)]="task.memberId" name="memberId" required>
+            <option *ngFor="let m of members" value="{{m._id}}">{{m.name}}</option>
+        </select>
+        <span *ngIf="nameOfMemberBox.errors?.required && nameOfMemberBox.touched">חסר בן משפחה</span>
+
+        <br>
+
+        <button [disabled]="myForm.form.invalid">הוסף מטלה</button>
+
+    </form>
+
+</div> -->

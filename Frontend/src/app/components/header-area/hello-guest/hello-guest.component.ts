@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 @Component({
   selector: 'app-hello-guest',
   templateUrl: './hello-guest.component.html',

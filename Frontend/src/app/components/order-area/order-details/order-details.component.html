@@ -1,0 +1,68 @@
+<div class="mainDiv">
+    <form *ngIf="detailsForm" [formGroup]="detailsForm" (ngSubmit)="onSubmit()">
+        <span> Order- Shipping Details</span>
+        <br /> <br />
+
+        <label>city</label>
+        <select 
+            (change)="getCities($event)"
+            placeholder="city"
+            type="text"
+            name="city"
+            id="city"
+            #city
+            required
+            formControlName="city" 
+            class="form-control"
+        >
+        <!-- [ngClass]="{ 'is-invalid': submitted && form.city.errors }" -->
+
+            <option value="" disabled="disabled">
+                select city
+            </option>
+            <option *ngFor="let city of cities" value="{{city._id}}">
+                {{city.cityName}}
+            </option>
+        </select>
+
+        <div *ngIf="submitted && form.city.errors" class="invalid-feedback">
+            <div *ngIf="form.city.errors.required">city is required</div>
+            <div *ngIf="form.city.errors.minlength">city must be at least 5 characters</div>
+        </div>
+
+
+        <label class="labelForm">street</label>
+        <input placeholder="street" type="text" name="street" id="street" #street required formControlName="street"
+            class="form-control" [ngClass]="{ 'is-invalid': submitted && form.street.errors }" />
+        <div *ngIf="submitted && form.street.errors" class="invalid-feedback">
+            <div *ngIf="form.street.errors.required">street is required</div>
+            <div *ngIf="form.street.errors.minlength">street must be at least 5 characters</div>
+        </div>
+
+        <label class="labelForm">shipping date</label>
+        <input placeholder="shipping date" type="date" name="shippingDate" id="shippingDate" #shippingDate
+            formControlName="shippingDate" class="form-control" [min]="now" required="required"
+            [ngClass]="{ 'is-invalid': submitted && form.street.errors }" />
+        <div *ngIf="submitted && form.shippingDate.errors" class="invalid-feedback">
+            <div *ngIf="form.shippingDate.errors.required">shipping date is required</div>
+        </div>
+
+        <label class="labelForm">credit card</label>
+        <input placeholder="credit card" type="number" name="creditCard" id="creditCard" #creditCard required
+            formControlName="creditCard" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && form.street.errors }" />
+        <div *ngIf="submitted && form.creditCard.errors" class="invalid-feedback">
+            <div *ngIf="form.creditCard.errors.required">credit card is required</div>
+            <div *ngIf="form.creditCard.errors.minlength">credit card must be at least 4 characters</div>
+        </div>
+        <br />
+
+        <button
+        (click)="ccc()"
+        >
+            Order
+        </button>
+    </form>
+
+
+</div>

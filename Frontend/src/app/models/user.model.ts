@@ -1,9 +1,15 @@
 export class UserModel {
-    public id = 'number';
+    public identity = 'number';
     public firstName = 'string';
     public lastName = 'string';
-    public username = 'string';
+    public email = 'string';
+    // public username: 'string'
     public password = 'string';
     public token = 'string';
     public isAdmin = 'boolean';
+    public city = 'string';
+    public street = 'string';
+    public passwordConfirm = 'string';
+    public shippingDate: 'date';
+    public creditCard: 'number'
 }

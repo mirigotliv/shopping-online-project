@@ -1,0 +1,17 @@
+
+.mainDiv {
+    display: flex;
+    white-space: nowrap;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-left: 34px;
+}
+
+input {
+    height: 32px;
+    margin-left: 10px;
+}
+
+.matIcon {
+    margin-top: 5px;
+}

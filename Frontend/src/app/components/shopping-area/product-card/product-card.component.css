@@ -1,0 +1,42 @@
+.mainDiv {
+    width: 180px;
+    height: 155px;
+    margin-top: 160px;
+    box-shadow: 3px 3px 5px rgb(94, 94, 94);
+    border-radius: 20px;
+    display: inline-block;
+    text-align: center;
+    padding-right: 0;
+    font-size: large; 
+    background-image: linear-gradient(135deg, #6292f8,#dceeff ) ;
+    /* margin-left: 25px; */
+}
+
+img {
+    width: 125px;
+    height: 115px;
+    border-radius: 15px;
+    border: 1px solid rgb(148, 148, 148);
+    vertical-align: middle;
+}
+
+h3 { 
+    margin-top: 20px;
+    color: white;
+    text-shadow: 1px 1px 2px black;
+    font-family: "Adobe Devanagari";
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+h2 { 
+    margin-top: 10px;
+    color: red;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: "Adobe Devanagari";
+}
+
+.iddd {
+    display: inline-block;
+}
