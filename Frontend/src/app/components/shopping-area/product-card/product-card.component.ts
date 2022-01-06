@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ProductCardComponent implements OnInit {
     @Input()
-    public product: ProductModel;
+    public product: ProductModel; 
     public display = "none";
 
     public imagesUrl = environment.imagesUrl;

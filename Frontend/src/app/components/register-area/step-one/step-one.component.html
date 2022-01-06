@@ -1,4 +1,3 @@
-
 <div>
     <!-- register-step 1: -->
     <div class="divStep1" id="step1">
@@ -6,44 +5,84 @@
           [formGroup]="registerForm"
           id="formData"
           #userData="ngForm" 
-        >
+          (ngSubmit)="onSubmit()"
+
+          >
         <!-- (ngSubmit)="onClickNext()" -->
 
             <p>Sign in - step 1 </p>
-
+        <!-- "id" field -->
             <label>ID:</label>
-            <input placeholder='identity' id="id" #id required formControlName="id" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f.id.errors }" ngModel type="number" name="id" />
-            <div *ngIf="submitted && f.id.errors" class="invalid-feedback">
-                <div *ngIf="f.id.errors.required">id is required</div>
-                <div *ngIf="f.id.errors.minlength">id must be at least 9 characters</div>
+            <input
+               placeholder='identity'
+               id="id" 
+               #id 
+               required 
+               formControlName="id" 
+               class="form-control"
+               [ngClass]="{ 'is-invalid': submitted && form.id.errors }"
+               ngModel 
+               type="number"
+               name="id"
+            />
+        <!-- "id" display errors -->
+            <div *ngIf="submitted && form.id.errors" class="invalid-feedback">
+                <div *ngIf="form.id.errors.required">
+                    id is required
+                </div>
+                <div *ngIf="form.id.errors.minlength">
+                    id must be at least 9 characters
+                </div>
             </div>
             <br />
 
+        <!-- "email" field -->
             <label>Email:</label>
-            <input placeholder='email' id="email" #email required formControlName="email" class="form-control"
-            pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{3,}"
-                [ngClass]="{ 'is-invalid': submitted && f.email.errors }" ngModel name="email" />
-            <div *ngIf="submitted && f.email.errors" class="invalid-feedback" type="text">
-                <div *ngIf="f.email.errors.required">email is required</div>
-                <div *ngIf="f.email.errors.minlength">email must be at least 11 characters</div>
-                <div *ngIf="f.email.errors">
+            <input
+               placeholder='email'
+               id="email"
+               #email
+               required
+               formControlName="email"
+               class="form-control"
+               pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{3,}"
+               [ngClass]="{ 'is-invalid': submitted && form.email.errors }"
+               ngModel 
+               name="email" 
+            />
+        <!-- "email" display errors -->
+            <div *ngIf="submitted && form.email.errors"
+                 class="invalid-feedback"
+                 type="text"
+            >
+                <div *ngIf="form.email.errors.required">
+                    email is required
+                </div>
+                <div *ngIf="form.email.errors.minlength">
+                    email must be at least 11 characters
+                </div>
+                <div *ngIf="form.email.errors">
                     please write a valid email.
                   </div>
             </div>
             <br />
 
+        <!-- "password" field -->
             <label>Password:</label>
             <div class="divPassAndIcon">
                <input
-               placeholder="password" id="password" #password required
-               formControlName="password" class="form-control"
-               [type]="passwordType"
-               [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
-               ngModel
-               type="password"
-               name="password"
-            />
+                 placeholder="password" 
+                 id="password"
+                 #password
+                 required
+                 formControlName="password"
+                 class="form-control"
+                 [type]="passwordType"
+                 [ngClass]="{ 'is-invalid': submitted && form.password.errors }"
+                 ngModel
+                 type="password"
+                 name="password"
+              />
                 <span
                  class="material-icons"
                   visibility
@@ -52,22 +91,33 @@
                     visibility
                 </span> 
             </div>
-            
-                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                <div *ngIf="f.password.errors.required">password is required</div>
-                <div *ngIf="f.password.errors.minlength">password must be at least 5 characters</div>
+        <!-- "password" display errors -->
+                <div *ngIf="submitted && form.password.errors" 
+                    class="invalid-feedback">
+                <div *ngIf="form.password.errors.required">
+                    password is required
+                </div>
+                <div *ngIf="form.password.errors.minlength">
+                    password must be at least 5 characters
+                </div>
             </div>
             <br />
 
+        <!-- "confirm password" field -->
             <label>Confirm Password:</label>
             <div class="divPassAndIcon">
-
-            <input placeholder="confirm password" id="passwordConfirm" #passwordConfirm required
-                formControlName="passwordConfirm" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f.passwordConfirm.errors }" ngModel type="password"
-                name="passwordConfirm"
-                [type]="passwordType"
-                />
+              <input
+                 placeholder="confirm password"
+                 id="passwordConfirm"
+                 #passwordConfirm 
+                 required
+                 formControlName="passwordConfirm"
+                 class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && form.passwordConfirm.errors }"
+                 ngModel type="password"
+                 name="passwordConfirm"
+                 [type]="passwordType"
+              />
                 <span
                   class="material-icons"
                   visibility
@@ -76,27 +126,38 @@
                     visibility
                 </span> 
             </div>
-            <div *ngIf="submitted && f.passwordConfirm.errors" class="invalid-feedback">
-                <div *ngIf="f.passwordConfirm.errors.required">password confirm is required</div>
-                <div *ngIf="f.passwordConfirm.errors.minlength">password confirm must be at least 5 characters</div>
-                <div *ngIf="f.passwordConfirm.errors.mustMatch">password and password confirm must match</div>
+         <!-- "password confirm" display errors -->
+            <div *ngIf="submitted && form.passwordConfirm.errors"
+                 class="invalid-feedback"
+            >
+                <div *ngIf="form.passwordConfirm.errors.required">
+                    password confirm is required
+                </div>
+                <div *ngIf="form.passwordConfirm.errors.minlength">
+                    password confirm must be at least 5 characters
+                </div>
+                <div *ngIf="form.passwordConfirm.errors.mustMatch">
+                    password and password confirm must match
+                </div>
             </div>
             <br /><br />
 
+        <!-- button- "Back to login" -->
             <button class="backToLogin" routerLink="/login">
                 Back to login
             </button>
 
-            <button 
+        <!-- button -"Next" -->
+            <button
                 value="Register"
                 class="nextButton"
-                type="submit"
+                type="submit"z
                 (click)="onClickButton()"
             > 
                 Next
             </button>
+             <!-- icon to right: --> 
             <mat-icon class="matIcon">east</mat-icon>
-
         </form>
     </div>
 </div>

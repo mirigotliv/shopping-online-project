@@ -1,5 +1,5 @@
 export class ProductModel {
-    public id: number
+    public _id: string
     public productName: string
     public price: number
     public categoryId: string

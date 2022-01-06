@@ -1,0 +1,109 @@
+.mainDiv {
+    display: flex;
+}
+
+input {
+    height: 32px;
+    width: 16%;
+    margin-left: 10px;
+    border: 3px solid blue;
+}
+
+/* .matIcon {
+    margin-top: 5px;
+} */
+
+.searchProductDiv {
+    display: flex;
+    white-space: nowrap;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-left: 34px;
+}
+
+.divProducts {
+    border: 2px solid blue;
+    display: inline-block;
+    height: 600px;
+    margin-left: 80px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 1000px;
+}
+
+a, p {
+    font-size: 23px;
+}
+
+a {
+ margin-left: 50px;
+}
+
+.categoriesName{
+    display: flex;
+    margin-top: 20px;
+}
+
+.modal{
+    height: 800px;
+    margin-left: 35%;
+    margin-top: 12%;
+    width: 600px;
+}
+
+.myButton:hover {
+    background-color: rgb(192, 221, 255);
+}
+
+.divCounter {
+    border: 2px solid rgb(0, 140, 255);
+    font-size: 18px;
+    font-weight: bold;
+    height: 30px;
+    margin-left: 10px;
+    padding: 5px;
+    text-align: center;
+    width: 25%;
+}
+
+#divNumber{
+    display: flex;
+    margin-top: 15px;
+}
+
+h4 {
+    font-size: 21px;
+    font-weight: bold;
+    margin-left: 30px;
+    margin-top: 40px;
+    text-align: left;
+}
+
+#buttonAddNum{
+    height: 28px;
+    margin-left: 70px;
+    text-align: center;
+}
+
+.modal-content {
+    height: 250px;
+    width: 450px;
+}
+
+#resetMountButton {
+    color: rgb(20, 23, 220);
+    font-size: 23px;
+    margin-left: 50px;
+}
+
+#closeModalButton, #addProduct {
+    color: rgb(20, 23, 220);
+    font-size: 23px;
+    margin-left: 20px;
+    margin-top: 45px;
+    text-align: center;
+}
+
+button:hover {
+    background-color: rgb(192, 221, 255);
+}

@@ -11,23 +11,12 @@ import { ApiService } from 'src/app/services/api.service'
     styleUrls: ['./step-one.component.css']
 })
 
-// @NgModule({
-//     imports: [FormRegisterComponent],
-//     declarations: [FormRegisterComponent],
-//     providers: [],
-// })
-
 export class StepOneComponent implements OnInit {
 
     @Input() onClickNext: any;
 
     passwordType: string = 'password'
     passwordShown: boolean = false
-    // showStep2: boolean = true
-
-    // public toggleShowStep2() {
-    //     this.showStep2 = !this.showStep2
-    // }
 
     public togglePassword() {
         if (this.passwordShown) {
@@ -43,7 +32,7 @@ export class StepOneComponent implements OnInit {
     registerForm: FormGroup;
     submitted = false;
 
-    constructor(private formBuilder: FormBuilder, private myRouter: Router, private apiService: ApiService) { }
+    constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService) { }
     ngOnInit() {
         this.registerForm = this.formBuilder.group({
             id: ['', [Validators.required, Validators.minLength(9)]],
@@ -57,11 +46,18 @@ export class StepOneComponent implements OnInit {
     }
 
     // convenience getter for easy access to form fields
-    get f() {
+    get form() {
         return this.registerForm.controls;
     }
 
     onClickButton() {
+        // this.submitted = false
+        if (!this.checkAllValid()) {
+            return
+            // console.log('checking form', this.registerForm.controls.value)
+        }
+        
+        console.log('checking', this.registerForm.value)
         console.log(email.value,
             id.value,
             password.value,
@@ -73,11 +69,11 @@ export class StepOneComponent implements OnInit {
     }
 
     checkAllValid() {
+        console.log('miri')
         let allValid = true
         // console.log(typeof this.registerForm.controls)
         Object.keys(this.registerForm.controls).forEach(key => {
-            // console.log('key', this.registerForm.controls[key])
-            // console.log(this.registerForm.controls[key].status)
+            console.log(this.registerForm.controls.status)
             if (this.registerForm.controls[key].status === 'INVALID') {
                 console.log('invalid')
                 allValid = false
@@ -85,6 +81,10 @@ export class StepOneComponent implements OnInit {
         })
         console.log(allValid)
         return allValid
+    }
+
+    onSubmit() {
+        this.submitted = true;
     }
 
     // registerUser(user) {
@@ -104,18 +104,18 @@ export class StepOneComponent implements OnInit {
     // this.toggleShowStep2()
     // }
 
-    checkAllValid() {
-        let allValid = true
-        // console.log(typeof this.registerForm.controls)
-        Object.keys(this.registerForm.controls).forEach(key => {
-            // console.log('key', this.registerForm.controls[key])
-            // console.log(this.registerForm.controls[key].status)
-            if (this.registerForm.controls[key].status === 'INVALID') {
-                console.log('invalid')
-                allValid = false
-            }
-        })
-        console.log(allValid)
-        return allValid
-    }
+    // checkAllValid() {
+    //     let allValid = true
+    //     // console.log(typeof this.registerForm.controls)
+    //     Object.keys(this.registerForm.controls).forEach(key => {
+    //         // console.log('key', this.registerForm.controls[key])
+    //         // console.log(this.registerForm.controls[key].status)
+    //         if (this.registerForm.controls[key].status === 'INVALID') {
+    //             console.log('invalid')
+    //             allValid = false
+    //         }
+    //     })
+    //     console.log(allValid)
+    //     return allValid
+    // }
 }

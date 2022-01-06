@@ -1,19 +1,17 @@
+/* style to main div */
 .mainDiv {
     display: flex;
 }
 
+/* style to image- 'order.jpg' */
 img {
+    border-radius: 25px;
     height: 300px;
-    width: 300px;
     margin-left: 100px;
     margin-top: 80px;
-    border-radius: 25px;
+    width: 300px;
 }
 
-a {
-    margin-left: 10px;
-}
-
-.cc {
+.cart {
     margin-top: 50px;
 }

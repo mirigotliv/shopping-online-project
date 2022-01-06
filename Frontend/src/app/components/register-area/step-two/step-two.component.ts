@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { ApiService } from 'src/app/services/api.service';
 import { Input, TemplateRef } from '@angular/core';
-import { identity } from 'rxjs';
+// import { identity } from 'rxjs';
 
 
 @Component({
@@ -18,7 +18,8 @@ import { identity } from 'rxjs';
 })
 export class StepTwoComponent implements OnInit {
     // @Input email: TemplateRef<string>;
-    @Input() onSubmit2: any;
+    @Input()
+    onSubmit2: (any);
     @Input()
     public email: string
     @Input()
@@ -55,7 +56,7 @@ export class StepTwoComponent implements OnInit {
     }
 
     // convenience getter for easy access to form fields
-    get f() { return this.registerForm.controls; }
+    get form() { return this.registerForm.controls; }
 
     // onSubmit() {
     //     this.submitted = true;
@@ -68,16 +69,13 @@ export class StepTwoComponent implements OnInit {
 
     onSubmit() {
         console.log('hi submit')
-        // console.log(this.registerForm.value.city)
-        // console.log(city)
-        // console.log(this.city)
-        // console.log(this.registerForm)
-        // console.log(this.registerForm.city)
         this.onSubmit2(
-            this.registerForm.value.city,
-            this.registerForm.value.firstName,
-            this.registerForm.value.lastName,
-            this.registerForm.value.street
+            {
+                city: this.registerForm.value.city,
+                firstName: this.registerForm.value.firstName,
+                lastName: this.registerForm.value.lastName,
+                street: this.registerForm.value.street
+            }
         )
         this.submitted = true;
         if (this.registerForm.valid) {
@@ -87,8 +85,6 @@ export class StepTwoComponent implements OnInit {
 
     registerUser() {
         console.log('ccc')
-        // console.log(this.email.value)
-        // console.log(email, city, street, firstName, lastName)
         new ApiService().registerUser(
             this.email,
             this.id,

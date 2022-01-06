@@ -1,6 +1,7 @@
 // @ts-nocheck
 import { Component } from '@angular/core'
 import { FormControl, FormGroup } from '@angular/forms'
+import { ApiService } from 'src/app/services/api.service'
 
 @Component({
     selector: 'app-form-register',
@@ -16,21 +17,26 @@ export class FormRegisterComponent {
     id: number = -1
     password: string = ''
     passwordConfirm: string = ''
-    
 
     public toggleShowStep2() {
         this.showStep2 = !this.showStep2
     }
 
+    constructor(private apiService: ApiService) { }
+    registerUser(user) {
+        this.apiService(user)
+    }
+
     signUp(
-        id: number,
-        email: string,
-        password: string,
-        passwordConfirm: string,
-        city: string,
-        street: string,
-        firstName: string,
-        lastName: string,
+        {
+            id,
+            email,
+            password,
+            passwordConfirm,
+            city,
+            firstName,
+            lastName,
+            street, }
     ) {
         console.log('id', id);
         console.log('email', email);
@@ -46,41 +52,45 @@ export class FormRegisterComponent {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    city,
-                    email,
-                    firstName,
                     id,
-                    lastName,
+                    email,
                     password,
                     passwordConfirm,
+                    city,
+                    firstName,
+                    lastName,
                     street
                 })
             });
     }
 
-    onSubmit = (city, firstName, lastName, street) => {
-
+    onSubmit = ({ city, firstName, lastName, street }) => {
         console.log('submit')
         console.log(city)
         console.log(this)
         console.log('this.id ', this.id)
-        // console.log(this.id, this.email, this.password,
-        //     this.passwordConfirm,
-        //     city, street, firstName, lastName)
-        this.signUp(this.id, this.email, this.password,
-            this.passwordConfirm,
-            city, street, firstName, lastName)
+        this.signUp({
+            city,
+            email: this.email,
+            firstName,
+            id: this.id,
+            lastName,
+            password: this.password,
+            passwordConfirm: this.passwordConfirm,
+            street,
+        }
+        )
         this.submitted = true;
     }
 
     registerForm: FormGroup = new FormGroup({
-        city: new FormControl(''),
-        email: new FormControl(''),
-        firstName: new FormControl(''),
         id: new FormControl(''),
-        lastName: new FormControl(''),
+        email: new FormControl(''),
         password: new FormControl(''),
         passwordConfirm: new FormControl(''),
+        city: new FormControl(''),
+        firstName: new FormControl(''),
+        lastName: new FormControl(''),
         street: new FormControl('')
     })
 
@@ -96,7 +106,6 @@ export class FormRegisterComponent {
             }
         })
         console.log(allValid)
-
         return allValid
     }
 
@@ -110,18 +119,16 @@ export class FormRegisterComponent {
         this.submitted = true;
         console.log(this.registerForm.controls)
         // stop here if form is invalid
-        console.log('valid')
+        // console.log('valid')
         if (this.checkAllValid()) {
             console.log('aaa')
+            // console.log('check', this.registerForm.value)
             this.toggleShowStep2()
         }
         this.id = id
         this.email = email
         this.password = password
         this.passwordConfirm = passwordConfirm
-
-        // this.toggleShowStep2()
     }
-
     // public bindClickNext = this.onClickNext.bind(this)
 }

@@ -1,39 +1,43 @@
+/* style to main div  */
 .mainDiv {
-    height: 250px;
-    width: 400px;
-    border: 2px solid  blue;
-    margin-left: 40%;
+    align-items: center;
     border-radius: 25px;
+    border: 2px solid  blue;
+    height: 250px;
+    margin-left: 40%;
     margin-top: 50px;
     text-align: center;
-    align-items: center;
+    width: 400px;
 }
 
 .divPassages {
     margin-top: 50px;
 }
 
+/* style to passage-"!קנייתך בוצעה בהצלחה" */
 .passageSuccess {
     font-size: 30px;
-
 }
 
 .passageDownload {
     font-size: 25px;
 }
 
+/* style to button "אישור" */
+button {
+    border-radius: 5px;
+    font-size: 20px;
+    margin-top: 30px;
+    padding: 7px;
+    width: 35%;
+}
+
+/* style to button "אישור"  when you hover on this button*/
 button:hover {
     background-color: rgb(192, 221, 255);
 }
 
-button {
-    margin-top: 30px;
-    width: 35%;
-    padding: 7px;
-    font-size: 20px;
-    border-radius: 5px;
-}
-
+/* style to link-"אישור" */
 a {
     text-decoration: underline;
 }

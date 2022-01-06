@@ -5,7 +5,7 @@ function getOneCartAsync() {
     return CartModel.find().exec();
 }
 
-// Add cart: 
+// add cart: 
 function addCartAsync(cart) {
     return cart.save();
 }
@@ -15,10 +15,11 @@ function updateCartAsync(cart) {
     return info.n ? cart : null; // n = the number of documents updated.
 }
 
-// Delete cart: 
+// delete cart: 
 function deleteCartAsync(_id) {
     return CartModel.deleteOne({ _id }).exec();
 }
+
 module.exports = {
     getOneCartAsync,
     addCartAsync,

@@ -1,100 +1,51 @@
-const Customer = require('../models/user-model')
-const Admin = require('../models/admin-model')
 const UserModel = require('../models/user-model')
-// const User = require('../models/user-model')
 const dal = require('../data-access-layer/dal')
+
 const USER_NOT_FOUND = 401
 const WRONG_PASSWORD = 402
 const SUCCESS = 200
 
-
-
-// Get all users: 
-function getAllUsersAsync() {
-    console.log('ddd')
-    return UserModel.find().exec();
+// get all users: 
+async function getUserIdAsync(email) {
+    let userId = -1
+    await UserModel.findOne({ email }, (error, user) => {
+        if (user) {
+            userId = user.id
+        }
+    })
+    return userId
 }
-
-// async function listDatabases(client) {
-//     databasesList = await client.db().admin().listDatabases();
-
-//     console.log("Databases:");
-//     databasesList.databases.forEach(db => console.log(` - ${db.name}`));
-// };
-
-// const login = async (request, response) => {
-//     const findUsername = UserModel.find({ email })
-//     const findPassword = UserModel.find({ password }).exec()
-//     const usernameResult = await dal.connectAsync(findUsername)
-
-//     if (!usernameResult.length) {
-//         response.status(USER_NOT_FOUND).json({ error: 'Username not exists' })
-//     }
-//     else {
-//         const userPassword = await dal.connectAsync(findPassword)
-
-//         if (userPassword[0].password === request.body.password) {
-//             // const getUserId = User.findOne({ _id })
-//             // const id = await dal.connectAsync(getUserId)
-
-//             response.status(SUCCESS).json({ message: 'success login' })
-//         }
-//         else {
-//             response.status(WRONG_PASSWORD).json({ error: 'wrong password' })
-//         }
-//     }
 
 //login:
 const login = async (email, password) => {
     let status = 500
+    console.log('1')
     await UserModel.findOne({ email }, (error, user) => {
-        console.log('user', user)
+        console.log('2')
         if (!user) {
+            console.log('3')
             status = USER_NOT_FOUND
+            return
         }
         else if (password !== user.password) {
+            console.log('4')
             status = WRONG_PASSWORD
         }
         else {
+            console.log('5')
             status = SUCCESS
         }
     })
+    console.log('status', status)
     return status
 }
 
-
-
-// if (findUsername) {
-
-//     console.log(`Found a listing in the collection with the name 'users':`);
-//     // console.log(user);
-// } else {
-//     console.log(`No listings found with the name ''`);
-//     // response.sendStatus(USERNAME_EXISTS).json({ error: 'user already exists' })
-// }
-
-// if (userPassword) {
-//     console.log(`Found a listing in the collection with the name 'users':`);
-//     // console.log(user);
-// } else {
-//     console.log(`No listings found with the name ''`);
-// }
-
-//     catch (error) {
-//         console.error(error);
-//     }
-// }
-
+// register:
 const register = (request, response) => {
     console.log('register')
     console.log(request.body)
-    // console.log('request', JSON.parse(request.body))
-    // console.log('tostring: ', request.body.user.toString())
-    // console.log('tojson ', Object.JSON(request.body.user))
-    // console.log('tojson to string ', Object.JSON(request.body.user).toString())
 
     const id = request.body.id || -1
-    const _id = request.body._id
     const email = request.body.email
     const password = request.body.password
     const passwordConfirm = request.body.passwordConfirm
@@ -102,14 +53,14 @@ const register = (request, response) => {
     const street = request.body.street
     const lastName = request.body.lastName
     const firstName = request.body.firstName
+    console.log('id', request.body.id)
 
     const user = new UserModel()
-    user._id = _id
     user.id = id
     user.email = email
     user.password = password
     user.passwordConfirm = passwordConfirm
-
+    user.cart = []
     user.city = city
     user.street = street
     user.lastName = lastName
@@ -125,7 +76,6 @@ const register = (request, response) => {
         response.send({ success: "Successfully added new user", status: 200 })
     })
 }
-
 
 // עידכון יוזר
 // function updateUser(user) {
@@ -154,5 +104,5 @@ module.exports = {
     login,
     register,
     // updateUser,
-    getAllUsersAsync
+    getUserIdAsync
 }

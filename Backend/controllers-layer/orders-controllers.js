@@ -1,8 +1,8 @@
-const orderLogic = require('.././business-logic-layer/orders-logic'),
-    router = require('express').Router()
+router = require('express').Router()
+const orderLogic = require('../business-logic-layer/orders-logic')
 
-// Add order:
-router.post('/api/orders', async (request, response) => {
+// add order:
+router.post('/orders', async (request, response) => {
     try {
         response.status(201).json(await orderLogic.addOrderAsync(request.body))
     }

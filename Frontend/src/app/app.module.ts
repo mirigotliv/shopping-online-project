@@ -10,12 +10,12 @@ import { AboutUsComponent } from './components/login-area/about-us/about-us.comp
 import { TotalQuantityComponent } from './components/login-area/total-quantity/total-quantity.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StepOneComponent } from './components/register-area/step-one/step-one.component';
-import { StepComponent } from './common/components/step/step.component';
+import { StepComponent } from './components/step/step.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ContactUsComponent } from './components/header-area/contact-us/contact-us.component';
 import { MatIconModule } from "@angular/material/icon";
 import { SearchProductComponent } from './components/shopping-area/search-product/search-product.component';
-import { ProductCategoriesComponent } from './components/shopping-area/product-categories/product-categories.component';
+import { ShoppingComponent } from './components/shopping-area/shopping/shopping.component';
 import { OrderComponent } from './components/shopping-area/order/order.component';
 import { TotalAmountComponent } from './components/shopping-area/total-amount/total-amount.component';
 import { CartComponent } from './components/shopping-area/cart/cart.component';
@@ -43,7 +43,7 @@ import { ProductCardComponent } from './components/shopping-area/product-card/pr
         StepComponent,
         ContactUsComponent,
         SearchProductComponent,
-        ProductCategoriesComponent,
+        ShoppingComponent,
         OrderComponent,
         TotalAmountComponent,
         CartComponent,
@@ -57,6 +57,7 @@ import { ProductCardComponent } from './components/shopping-area/product-card/pr
         ProductCardComponent
     ],
     imports: [
+        ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
         BrowserModule,
         AppRoutingModule,
         FormsModule,

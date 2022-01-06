@@ -1,0 +1,89 @@
+<div class="searchProductDiv">
+    <p> Search product: </p>
+    <input
+     type="text"
+     class="form-control"
+     placeholder="Product Name"
+     name="search"
+     [(ngModel)]="searchText"
+    />
+</div>
+
+<div class="mainDiv">
+        <!-- add cart component- in sidebar: -->
+    <app-cart></app-cart>
+
+       <!-- names of categories -->
+        <div class="divProducts">
+            <div class="categoriesName">
+        <a
+          *ngFor="let category of categories"
+          (click)="onClickCategory(category._id)">
+           <p>
+               {{category.categoryName}}
+           </p>
+        </a>
+       </div>
+       
+       <!-- display cards of products: -->
+         <app-product-card  
+              (click)="openModal(product._id)"
+              *ngFor="let product of productsToDisplay" [product]="product">
+         </app-product-card>
+</div>
+
+    <!-- div that displayed when the user "click" on each card of product -->
+    <div
+        class="modal"
+        [ngStyle]="{'display':display}"
+    >
+    <div class="modal-content">
+        <h4 class="modal-title">
+          choose amount you want from this product:
+        </h4>
+        <button
+             type="button"
+             class="close"
+             (click)="onCloseHandled()"
+        >
+        </button>
+
+        <div
+         id="divNumber"
+         >
+            <button
+             id="buttonAddNum"
+              (click)="addNum()"
+            >
+                <p>+</p>
+            </button>
+            <div
+             class="divCounter"
+             >{{count}}
+            </div>
+        </div>
+
+        <!-- button-"reset mount" -->
+        <button id="resetMountButton" (click)="reset()">
+            <p>reset mount</p>
+        </button>
+
+        <!-- button-"cancel" -->
+        <button 
+             id="closeModalButton"
+             type="button"
+             (click)="onCloseHandled()"
+        >
+          cancel
+        </button>
+
+        <!-- button-"add"-to add product to cart -->
+        <button
+          (click)="addProductToCart()"
+          id="addProduct"
+        >
+          add
+        </button>
+
+    </div>
+</div>

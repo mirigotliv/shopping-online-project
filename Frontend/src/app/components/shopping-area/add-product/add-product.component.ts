@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
 export class AddProductComponent{
     public product: ProductModel = new ProductModel();
 
-  constructor(private http: HttpClient, private myRouter: Router) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
 //   async ngOnInit(){
 
@@ -20,7 +20,7 @@ export class AddProductComponent{
         try {
             await this.http.post<ProductModel>(environment.productsUrl, this.product).toPromise();
             alert("המשימה התווספה לטבלת המטלות!");
-            this.myRouter.navigateByUrl("/products");
+            this.router.navigateByUrl("/products");
         }
         catch (err) {
             alert(err);

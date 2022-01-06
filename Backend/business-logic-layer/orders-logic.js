@@ -1,7 +1,6 @@
 const Order = require('../models/order-model')
 
-
-// Add order: 
+// add order: 
 function addOrderAsync(order) {
     return order.save();
 }

@@ -2,15 +2,17 @@ const mongoose = require('mongoose')
 // const bcrypt = require('bcrypt')
 
 const UserSchema = mongoose.Schema({
-    _id: {
-        type: Number,
+    // _id: {
+    //     type: String,
+    // },
+    cart: {
+        type: Array
     },
-    // לבדוק
     id: {
         type: Number,
         required: [true, "Missing id"],
         minlength: [9, "id must be minimum 9 chars"],
-        maxlength: [100, "Name can't exceed 100 chars"]
+        maxlength: [100, "id can't exceed 100 chars"]
     },
     email: {
         type: String,
@@ -46,24 +48,7 @@ const UserSchema = mongoose.Schema({
         minlength: [5, "last name must be minimum 5 chars"],
         maxlength: [100, "Name can't exceed 100 chars"]
     },
-    // username: {
-    //     type: String,
-    //     required: [true, "Missing username"],
-    //     minlength: [11, "username must be minimum 11 chars"],
-    //     maxlength: [100, "username can't exceed 100 chars"]
-    // },
-
-
-
 }, { versionKey: false })
-
-// UserSchema.statics.hashPassword = function hashPassword(password) {
-//     return bcrypt.hashSync(password, 10)
-// }
-
-// UserSchema.methods.isValid = (password, hashedPassword) => {
-//     return bcrypt.compareSync(password, hashedPassword)
-// }
 
 const UserModel = mongoose.model("UserModel", UserSchema, "users");
 

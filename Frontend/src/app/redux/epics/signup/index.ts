@@ -11,8 +11,8 @@ const USER_EXIST = 209;
 export const signUp = (actions$: any) => {
     const signUpEpic$ = actions$.pipe(
         ofType(SIGN_UP),
-        switchMap(({ payload: { identity, email, password, passwordConfirm, city, street, name, lastName } }) =>
-            api.signUp(identity, email, password, passwordConfirm, city, street, name, lastName)
+        switchMap(({ payload: { id, email, password, passwordConfirm, city, street, name, lastName } }) =>
+            api.signUp(id, email, password, passwordConfirm, city, street, name, lastName)
 
                 .pipe(
                     switchMap((response) => {

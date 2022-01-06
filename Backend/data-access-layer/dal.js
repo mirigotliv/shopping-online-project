@@ -17,6 +17,6 @@ function connectAsync() {
 connectAsync().then(db => console.log("We're connected to MongoDB."))
     .catch(error => console.log(error))
 
-    module.exports = {
-        connectAsync
-    };
+module.exports = {
+    connectAsync
+};

@@ -9,50 +9,61 @@
         <!-- (ngSubmit)="onSubmit()" -->
 
             <p>Sign in - step 2 </p>
-
+        <!-- "city" field -->
             <label class="labelStep2">City:</label>
-            <select formControlName="city" autocomplete placeholder='city' id="city" #city required class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f.city.errors }">
-                <!-- <option disabled selected> select city </option> -->
+            <select
+               formControlName="city"
+               autocomplete 
+               placeholder='city' 
+               id="city"
+               #city
+               required 
+               class="form-control"
+               [ngClass]="{ 'is-invalid': submitted && form.city.errors }">
                 <option value="" disabled="disabled">select city</option>
                 <option *ngFor="let city of cities" value="{{city._id}}">{{city.cityName}}</option>
             </select>
-            <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
-                <div *ngIf="f.city.errors.required">city is required</div>
-                <div *ngIf="f.city.errors.minlength">city must be at least 5 characters</div>
+         <!-- "city" display errors -->
+            <div *ngIf="submitted && form.city.errors" class="invalid-feedback">
+                <div *ngIf="form.city.errors.required">city is required</div>
+                <div *ngIf="form.city.errors.minlength">city must be at least 5 characters</div>
             </div>
             <br />
 
+        <!-- "street" field -->
             <label class="labelStep2">Street:</label>
             <input placeholder='street' id="street" #street required formControlName="street" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f.street.errors }" />
-            <div *ngIf="submitted && f.street.errors" class="invalid-feedback">
-                <div *ngIf="f.street.errors.required">street is required</div>
-                <div *ngIf="f.street.errors.minlength">street must be at least 5 characters</div>
+                [ngClass]="{ 'is-invalid': submitted && form.street.errors }" />
+        <!-- "street" display errors -->
+            <div *ngIf="submitted && form.street.errors" class="invalid-feedback">
+                <div *ngIf="form.street.errors.required">street is required</div>
+                <div *ngIf="form.street.errors.minlength">street must be at least 5 characters</div>
             </div>
             <br />
 
+        <!-- "first name" field -->
             <label class="labelStep2">Name:</label>
             <input placeholder="firstName" id="firstName" #name required formControlName="firstName" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
-            <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
-                <div *ngIf="f.firstName.errors.required">first name is required</div>
-                <div *ngIf="f.firstName.errors.minlength">first name must be at least 5 characters</div>
+                [ngClass]="{ 'is-invalid': submitted && form.firstName.errors }" />
+        <!-- "first name" display errors -->
+            <div *ngIf="submitted && form.firstName.errors" class="invalid-feedback">
+                <div *ngIf="form.firstName.errors.required">first name is required</div>
+                <div *ngIf="form.firstName.errors.minlength">first name must be at least 5 characters</div>
             </div>
             <br />
 
+        <!-- "last name" field -->
             <label class="labelStep2">Last Name:</label>
             <input placeholder="last name" id="lastName" #lastName required formControlName="lastName"
-                class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
-            <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
-                <div *ngIf="f.lastName.errors.required">lastName is required</div>
-                <div *ngIf="f.lastName.errors.minlength">lastName must be at least 5 characters</div>
+                class="form-control" [ngClass]="{ 'is-invalid': submitted && form.lastName.errors }" />
+        <!-- "last name" display errors -->
+                <div *ngIf="submitted && form.lastName.errors" class="invalid-feedback">
+                <div *ngIf="form.lastName.errors.required">lastName is required</div>
+                <div *ngIf="form.lastName.errors.minlength">lastName must be at least 5 characters</div>
             </div>
             <br />
-            <!-- <button class="backToLogin">
-                Back to step 1
-            </button> -->
 
+        <!-- button- "Register" -->
             <button
                (click)="onSubmit()"
                value="Register"

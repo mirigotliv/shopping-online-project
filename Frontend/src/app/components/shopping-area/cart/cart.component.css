@@ -1,10 +1,9 @@
 .mainDiv {
-    height: 600px;
-    width: 390px;
     border: 2px solid blue;
-    margin-left: 14%;
+    height: 600px;
     margin-bottom: 30px;
-    /* display: inline-block; */
+    margin-left: 14%;
+    width: 390px;
 }
 
 p {
@@ -20,7 +19,7 @@ hr {
 
 .divOrderLink {
     display: flex;
-    margin-top: 95%;
+    margin-top: 60%;
 }
 
 a {
@@ -30,3 +29,19 @@ a {
     text-decoration: underline;
 }
 
+td {
+    color: blue;
+    font-size: large;
+}
+
+tr {
+    color: red;
+    font-weight: bold;
+    font-weight: bold;
+    margin-left: 40px;
+    font-size: x-large;
+}
+
+#nameProduct {
+    margin-left: 20px;
+}

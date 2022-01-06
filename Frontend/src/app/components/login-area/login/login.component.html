@@ -2,11 +2,6 @@
     <form 
         [formGroup]="loginForm"
         (ngSubmit)="onSubmit()">
-      <!-- <a
-        class="btn btn-primary btn-lg shoppingLink"
-        routerLink="/shopping">
-          Start Shopping
-      </a> -->
       <p class="registerPassage">
          Registered?
       </p>
@@ -26,7 +21,7 @@
               class="form-control"
               [ngClass]="{ 'is-invalid': submitted && form.email.errors }">
             
-               <!-- div for display error to user when he enters wrong data in email input -->
+            <!-- div for display error to user when he enters wrong data in email input -->
         <div
             *ngIf="submitted && form.email.errors"
             class="invalid-feedback"
