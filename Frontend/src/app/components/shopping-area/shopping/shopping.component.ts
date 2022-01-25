@@ -5,10 +5,8 @@ import { environment } from 'src/environments/environment';
 import { ProductModel } from 'src/app/models/product.model';
 
 const MILK_EGGS_CATEGORY_ID = "6139071ca12a4c3bbb0e808b"
-
 const SUCCESS = 200
 
-// types:
 type Product = {
     name: string,
     price: number,
@@ -32,7 +30,6 @@ export class ShoppingComponent implements OnInit {
     public price: number
     public productName: string
     public productId: string
-    // public _searchText: string
     public productsToDisplay: ProductModel[]
     public cart: any[] = [];
     public currentCart: CurrentCart = {}
@@ -138,7 +135,6 @@ export class ShoppingComponent implements OnInit {
                     )
                 this.totalPrice += this.price
                 Math.round((this.totalPrice + Number.EPSILON) * 100) / 100
-                // close modal after adding product to cart:
                 this.onCloseModal()
             })
     }

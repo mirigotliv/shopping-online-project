@@ -20,9 +20,7 @@ router.get('/categories', async (request, response) => {
 router.post('/getProducts', async (request, response) => {
     try {
         console.log('request.body.productName', request.body.productName)
-        // const products = await productsLogic.searchProducts(request.body.productName);
-
-        const products = await productsLogic.getAllProductsAsync();
+        const products = await productsLogic.searchProducts((!!request.body.productName && request.body.productName) || 'a');
         response.json(products);
     }
     catch (err) {
