@@ -1,4 +1,4 @@
 export class CityModel {
-    public _id: string;
-    public cityName: string;
+    public _id: string
+    public cityName: string
 }

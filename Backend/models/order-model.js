@@ -20,7 +20,7 @@ const OrdersSchema = mongoose.Schema({
     creditCard: {
         type: Number,
         required: [true, "Missing creditCard"],
-        min: [1000, "credit card must be min 4"]
+        min: [4, "credit card must be min 4"]
     },
     userId: {
         type: mongoose.Schema.Types.ObjectId

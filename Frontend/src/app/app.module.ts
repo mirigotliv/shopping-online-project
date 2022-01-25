@@ -10,14 +10,11 @@ import { AboutUsComponent } from './components/login-area/about-us/about-us.comp
 import { TotalQuantityComponent } from './components/login-area/total-quantity/total-quantity.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StepOneComponent } from './components/register-area/step-one/step-one.component';
-import { StepComponent } from './components/step/step.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ContactUsComponent } from './components/header-area/contact-us/contact-us.component';
 import { MatIconModule } from "@angular/material/icon";
-import { SearchProductComponent } from './components/shopping-area/search-product/search-product.component';
 import { ShoppingComponent } from './components/shopping-area/shopping/shopping.component';
 import { OrderComponent } from './components/shopping-area/order/order.component';
-import { TotalAmountComponent } from './components/shopping-area/total-amount/total-amount.component';
 import { CartComponent } from './components/shopping-area/cart/cart.component';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { OrderDetailsComponent } from './components/order-area/order-details/order-details.component';
@@ -27,9 +24,8 @@ import { StepTwoComponent } from './components/register-area/step-two/step-two.c
 import { ApiService } from './services/api.service';
 import { FormRegisterComponent } from './components/register-area/form-register/form-register.component';
 import { page404 } from './components/shared-area/page404/page-404.component';
-import { AddProductComponent } from './components/shopping-area/add-product/add-product.component';
 import { ProductCardComponent } from './components/shopping-area/product-card/product-card.component';
-
+import { SearchBarComponent } from './components/shopping-area/search-product/search-bar.component';
 
 @NgModule({
     declarations: [
@@ -40,12 +36,10 @@ import { ProductCardComponent } from './components/shopping-area/product-card/pr
         AboutUsComponent,
         TotalQuantityComponent,
         StepOneComponent,
-        StepComponent,
         ContactUsComponent,
-        SearchProductComponent,
+        SearchBarComponent,
         ShoppingComponent,
         OrderComponent,
-        TotalAmountComponent,
         CartComponent,
         OrderDetailsComponent,
         OrderPageComponent,
@@ -53,7 +47,6 @@ import { ProductCardComponent } from './components/shopping-area/product-card/pr
         StepTwoComponent,
         FormRegisterComponent,
         page404,
-        AddProductComponent,
         ProductCardComponent
     ],
     imports: [

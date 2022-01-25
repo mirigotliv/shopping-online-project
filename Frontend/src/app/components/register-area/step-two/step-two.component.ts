@@ -7,19 +7,17 @@ import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { ApiService } from 'src/app/services/api.service';
-import { Input, TemplateRef } from '@angular/core';
-// import { identity } from 'rxjs';
-
+import { Input } from '@angular/core';
 
 @Component({
     selector: 'app-step-two',
     templateUrl: './step-two.component.html',
     styleUrls: ['./step-two.component.css']
 })
+
 export class StepTwoComponent implements OnInit {
-    // @Input email: TemplateRef<string>;
     @Input()
-    onSubmit2: (any);
+    onSubmit2: (Function);
     @Input()
     public email: string
     @Input()
@@ -32,12 +30,16 @@ export class StepTwoComponent implements OnInit {
     registerForm: FormGroup;
     submitted = false;
 
-    constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router) { }
+    constructor(
+        private formBuilder: FormBuilder,
+        private http: HttpClient,
+        private router: Router
+    ) { }
+
     public cities: CityModel[];
 
     ngOnInit() {
         try {
-            // console.log(email.value)
             this.http.get<CityModel[]>(environment.citiesUrl).toPromise()
                 .then(cities => this.cities = cities);
         }
@@ -48,27 +50,28 @@ export class StepTwoComponent implements OnInit {
         this.registerForm = this.formBuilder.group({
             city: ['', [Validators.required]],
             street: ['', [Validators.required, Validators.minLength(5)]],
-            firstName: ['', [Validators.required, Validators.minLength(5)]],
-            lastName: ['', [Validators.required, Validators.minLength(5)]]
+            firstName: ['', [Validators.required, Validators.minLength(3)]],
+            lastName: ['', [Validators.required, Validators.minLength(3)]]
         }, {
             validator: MustMatch('city', 'street', 'firstName', 'lastName')
         });
     }
 
-    // convenience getter for easy access to form fields
-    get form() { return this.registerForm.controls; }
+    public areFieldsFilledCorrectly() {
+        if (!this.registerForm.value.city ||
+            !this.registerForm.value.street ||
+            !this.registerForm.value.firstName ||
+            !this.registerForm.value.lastName) {
+            return false
+        }
+        return true
+    }
 
-    // onSubmit() {
-    //     this.submitted = true;
-    // }
-    // stop here if form is invalid
-    // if (this.registerForm.invalid) {
-    // }
-    // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value))
-    // }
+    get form() {
+        return this.registerForm.controls;
+    }
 
     onSubmit() {
-        console.log('hi submit')
         this.onSubmit2(
             {
                 city: this.registerForm.value.city,
@@ -84,7 +87,6 @@ export class StepTwoComponent implements OnInit {
     }
 
     registerUser() {
-        console.log('ccc')
         new ApiService().registerUser(
             this.email,
             this.id,

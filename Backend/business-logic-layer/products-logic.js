@@ -1,5 +1,5 @@
-const ProductModel = require("../models/product-model");
-const CategoryModel = require("../models/category-model");
+const ProductModel = require('../models/product-model');
+const CategoryModel = require('../models/category-model');
 const UserModel = require('../models/user-model')
 
 // get all categories: 
@@ -14,24 +14,38 @@ function getAllProductsAsync() {
 
 // get products per category: 
 function getProductsByCategoryAsync(categoryId) {
-    return ProductModel.find({ categoryId }).populate("category").exec(); //category=virtuals field in "product-model.js"
+    return ProductModel.find({ categoryId }).populate('category').exec(); //category=virtual field in "product-model.js"
 }
 
 // add product to cart by userId: 
-async function addProductToCartAsync(productId, email) {
-    const a = await UserModel.updateOne(
+async function addProductToCartAsync({
+    email,
+    price,
+    productId,
+    productName,
+    quantity = 1,
+    oldCart = {}
+}) {
+    // add new product to old cart of user by $set:
+    await UserModel.updateOne(
         {
             email
         },
         {
             $set: {
                 cart: {
-                    [productId]: 1
+                    ...oldCart,
+                    [productId]: {
+                        productName,
+                        price,
+                        quantity
+                    }
                 }
             }
         })
 }
 
+// get cart by email of user:
 async function getUserCartAsync(email) {
     let cart = {}
     await UserModel.findOne({ email }, (error, user) => {
@@ -42,27 +56,36 @@ async function getUserCartAsync(email) {
     return cart
 }
 
-// Add product: 
-// function addProductsByUserIdAsync(_id) {
-//     return ProductModel.find({ _id }).populate("user").exec(); //user=virtuals field in "product-model.js"
-// }
+// delete product from cart (by 'update' the data in user cart): 
+async function deleteProductCartAsync({ email, cart }) {
+    await UserModel.updateOne(
+        {
+            email
+        },
+        {
+            $set: {
+                cart
+            }
+        })
+}
 
-// חיפוש מוצר
-// function getSearchResults(val) {
-//     return new Promise(async (resolve) => {
-//         const products = await getAllProducts()
-//         const foundProducts = await products.filter(p => {
-//             if (p.name.indexOf(val) >= 0) return p
-//         })
-//         resolve(foundProducts)
-//     })
 
+function searchProducts(value) {
+    return new Promise(async (resolve) => {
+        const products = await getAllProductsAsync()
+        const foundProducts = await products.filter(p => {
+            if (p.name.indexOf(value) >= 0) return p
+        })
+        resolve(foundProducts)
+    })
+}
 
 module.exports = {
     getAllCategoriesAsync,
     getAllProductsAsync,
     getProductsByCategoryAsync,
     addProductToCartAsync,
-    // getSearchResults,
-    getUserCartAsync
+    getUserCartAsync,
+    deleteProductCartAsync,
+    searchProducts
 }

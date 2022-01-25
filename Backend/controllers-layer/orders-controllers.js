@@ -1,14 +1,15 @@
-router = require('express').Router()
-const orderLogic = require('../business-logic-layer/orders-logic')
+const express = require('express');
+const router = express.Router();
+const ordersLogic = require('../business-logic-layer/orders-logic');
 
-// add order:
-router.post('/orders', async (request, response) => {
+router.post("/orders", async (request, response) => {
     try {
-        response.status(201).json(await orderLogic.addOrderAsync(request.body))
+        const order = new OrderModel(request.body);
+        const addedOrder = await ordersLogic.addOrderAsync(order);
+        response.status(201).json(addedOrder);
+    } catch (err) {
+        response.status(500).send(err.message);
     }
-    catch (error) {
-        response.status(500).send(error.message)
-    }
-})
+});
 
 module.exports = router

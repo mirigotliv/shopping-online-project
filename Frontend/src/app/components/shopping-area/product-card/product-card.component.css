@@ -1,17 +1,10 @@
-.mainDiv {
-    display: inline-block;
-}
-
 .card {
     background-image: linear-gradient(135deg, #6292f8,#dceeff ) ;
     border-radius: 20px;
     box-shadow: 3px 3px 5px rgb(94, 94, 94);
+    cursor: pointer;
     font-size: medium; 
-    height: 155px;
-    margin-left: 60px;
-    margin-top: 40px;
     text-align: center;
-    width: 180px;
 }
 
 img {
@@ -37,4 +30,3 @@ h2 {
     font-size: 25px;
     font-weight: bold;
 }
-

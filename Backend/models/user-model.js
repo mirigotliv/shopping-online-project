@@ -1,12 +1,9 @@
 const mongoose = require('mongoose')
-// const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt')
 
 const UserSchema = mongoose.Schema({
-    // _id: {
-    //     type: String,
-    // },
     cart: {
-        type: Array
+        type: Object
     },
     id: {
         type: Number,
@@ -39,16 +36,23 @@ const UserSchema = mongoose.Schema({
     firstName: {
         type: String,
         required: [true, "Missing first name"],
-        minlength: [5, "first name must be minimum 5 chars"],
+        minlength: [3, "first name must be minimum 3 chars"],
         maxlength: [100, "Name can't exceed 100 chars"]
     },
     lastName: {
         type: String,
         required: [true, "Missing last name"],
-        minlength: [5, "last name must be minimum 5 chars"],
+        minlength: [3, "last name must be minimum 5 chars"],
         maxlength: [100, "Name can't exceed 100 chars"]
     },
 }, { versionKey: false })
+
+//function- to encryption password in db(hash)
+UserSchema.pre('save', async function (next) {
+    const salt = await bcrypt.genSalt();
+    this.password = await bcrypt.hash(this.password, salt)
+    next();
+});
 
 const UserModel = mongoose.model("UserModel", UserSchema, "users");
 

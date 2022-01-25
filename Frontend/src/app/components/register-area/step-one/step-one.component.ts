@@ -13,10 +13,10 @@ import { ApiService } from 'src/app/services/api.service'
 
 export class StepOneComponent implements OnInit {
 
-    @Input() onClickNext: any;
-
+    @Input() onClickNext: Function;
     passwordType: string = 'password'
     passwordShown: boolean = false
+    @Input wrongMessageUser: string;
 
     public togglePassword() {
         if (this.passwordShown) {
@@ -45,77 +45,32 @@ export class StepOneComponent implements OnInit {
         });
     }
 
-    // convenience getter for easy access to form fields
     get form() {
         return this.registerForm.controls;
     }
 
     onClickButton() {
-        // this.submitted = false
         if (!this.checkAllValid()) {
             return
-            // console.log('checking form', this.registerForm.controls.value)
         }
-        
-        console.log('checking', this.registerForm.value)
-        console.log(email.value,
-            id.value,
-            password.value,
-            passwordConfirm.value)
         this.onClickNext(email.value,
             id.value,
             password.value,
-            passwordConfirm.value)
+            passwordConfirm.value
+        )
     }
 
     checkAllValid() {
-        console.log('miri')
         let allValid = true
-        // console.log(typeof this.registerForm.controls)
         Object.keys(this.registerForm.controls).forEach(key => {
-            console.log(this.registerForm.controls.status)
             if (this.registerForm.controls[key].status === 'INVALID') {
-                console.log('invalid')
                 allValid = false
             }
         })
-        console.log(allValid)
         return allValid
     }
 
     onSubmit() {
         this.submitted = true;
     }
-
-    // registerUser(user) {
-    //     // console.log(user)
-    //     this.apiService.registerUser(user)
-    // }
-
-    // public onClickNext = () => {
-    //     this.submitted = true;
-    //     console.log(this.registerForm.controls)
-    //     // stop here if form is invalid
-    //     console.log('valid')
-    //     if (this.checkAllValid()) {
-    //         console.log('aaa')
-    //         this.toggleShowStep2()
-    //     }
-    // this.toggleShowStep2()
-    // }
-
-    // checkAllValid() {
-    //     let allValid = true
-    //     // console.log(typeof this.registerForm.controls)
-    //     Object.keys(this.registerForm.controls).forEach(key => {
-    //         // console.log('key', this.registerForm.controls[key])
-    //         // console.log(this.registerForm.controls[key].status)
-    //         if (this.registerForm.controls[key].status === 'INVALID') {
-    //             console.log('invalid')
-    //             allValid = false
-    //         }
-    //     })
-    //     console.log(allValid)
-    //     return allValid
-    // }
 }

@@ -1,29 +1,25 @@
 <div>
-    <!-- register-step 1: -->
     <div class="divStep1" id="step1">
         <form
-          [formGroup]="registerForm"
-          id="formData"
-          #userData="ngForm" 
-          (ngSubmit)="onSubmit()"
-
+           [formGroup]="registerForm"
+           id="formData"
+           #userData="ngForm" 
+           (ngSubmit)="onSubmit()"
           >
-        <!-- (ngSubmit)="onClickNext()" -->
-
-            <p>Sign in - step 1 </p>
+            <p id="signIn">Sign in - step 1 </p>
         <!-- "id" field -->
             <label>ID:</label>
             <input
-               placeholder='identity'
-               id="id" 
-               #id 
-               required 
-               formControlName="id" 
-               class="form-control"
-               [ngClass]="{ 'is-invalid': submitted && form.id.errors }"
-               ngModel 
-               type="number"
-               name="id"
+                placeholder='identity'
+                id="id" 
+                #id 
+                required 
+                formControlName="id" 
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && form.id.errors }"
+                ngModel 
+                type="number"
+                name="id"
             />
         <!-- "id" display errors -->
             <div *ngIf="submitted && form.id.errors" class="invalid-feedback">
@@ -34,21 +30,21 @@
                     id must be at least 9 characters
                 </div>
             </div>
+               
             <br />
-
         <!-- "email" field -->
             <label>Email:</label>
             <input
-               placeholder='email'
-               id="email"
-               #email
-               required
-               formControlName="email"
-               class="form-control"
-               pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{3,}"
-               [ngClass]="{ 'is-invalid': submitted && form.email.errors }"
-               ngModel 
-               name="email" 
+                placeholder='email'
+                id="email"
+                #email
+                required
+                formControlName="email"
+                class="form-control"
+                pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{3,}"
+                [ngClass]="{ 'is-invalid': submitted && form.email.errors }"
+                ngModel 
+                name="email" 
             />
         <!-- "email" display errors -->
             <div *ngIf="submitted && form.email.errors"
@@ -66,30 +62,22 @@
                   </div>
             </div>
             <br />
-
         <!-- "password" field -->
             <label>Password:</label>
             <div class="divPassAndIcon">
                <input
-                 placeholder="password" 
-                 id="password"
-                 #password
-                 required
-                 formControlName="password"
-                 class="form-control"
-                 [type]="passwordType"
-                 [ngClass]="{ 'is-invalid': submitted && form.password.errors }"
-                 ngModel
-                 type="password"
-                 name="password"
-              />
-                <span
-                 class="material-icons"
-                  visibility
-                   (click)="togglePassword()"
-                >
-                    visibility
-                </span> 
+                    placeholder="password" 
+                    id="password"
+                    #password
+                    required
+                    formControlName="password"
+                    class="form-control"
+                    [type]="passwordType"
+                    [ngClass]="{ 'is-invalid': submitted && form.password.errors }"
+                    ngModel
+                    type="password"
+                    name="password"
+               />
             </div>
         <!-- "password" display errors -->
                 <div *ngIf="submitted && form.password.errors" 
@@ -102,26 +90,25 @@
                 </div>
             </div>
             <br />
-
         <!-- "confirm password" field -->
             <label>Confirm Password:</label>
             <div class="divPassAndIcon">
               <input
-                 placeholder="confirm password"
-                 id="passwordConfirm"
-                 #passwordConfirm 
-                 required
-                 formControlName="passwordConfirm"
-                 class="form-control"
-                 [ngClass]="{ 'is-invalid': submitted && form.passwordConfirm.errors }"
-                 ngModel type="password"
-                 name="passwordConfirm"
-                 [type]="passwordType"
+                   placeholder="confirm password"
+                   id="passwordConfirm"
+                   #passwordConfirm 
+                   required
+                   formControlName="passwordConfirm"
+                   class="form-control"
+                   [ngClass]="{ 'is-invalid': submitted && form.passwordConfirm.errors }"
+                   ngModel type="password"
+                   name="passwordConfirm"
+                   [type]="passwordType"
               />
                 <span
-                  class="material-icons"
-                  visibility
-                  (click)="togglePassword()"
+                    class="material-icons"
+                    visibility
+                    (click)="togglePassword()"
                 >
                     visibility
                 </span> 
@@ -140,26 +127,26 @@
                     password and password confirm must match
                 </div>
             </div>
-            <br /><br />
-
-        <!-- button- "Back to login" -->
+            <p id="wrongMessageUser">
+                {{wrongMessageUser}}
+             </p>
+            
             <button class="backToLogin" routerLink="/login">
                 Back to login
             </button>
 
-        <!-- button -"Next" -->
             <button
                 value="Register"
                 class="nextButton"
-                type="submit"z
+                type="submit"
                 (click)="onClickButton()"
             > 
                 Next
             </button>
-             <!-- icon to right: --> 
-            <mat-icon class="matIcon">east</mat-icon>
+
+            <mat-icon class="matIcon">
+                east
+            </mat-icon>
         </form>
     </div>
 </div>
-
-          

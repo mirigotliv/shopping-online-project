@@ -1,13 +1,13 @@
 <div>
    <app-step-one
-      *ngIf="!showStep2"
+       [wrongMessageUser]="wrongMessageUser"
+       *ngIf="!showStep2"
        [onClickNext]="onClickNext"
    >
-   <!-- [onClickNext]="bindClickNext"  -->
    </app-step-one>  
 
    <app-step-two
-    [onSubmit2]="onSubmit"
+       [onSubmit2]="onSubmit"
        *ngIf="showStep2"
    >
     </app-step-two>

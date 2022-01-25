@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 
 const ProductSchema = mongoose.Schema({
+    _id: String,
     productName: String,
     price: Number,
-    imageName: String,
     categoryId: mongoose.Schema.Types.ObjectId
 },
     { versionKey: false, toJSON: { virtuals: true }, id: false });

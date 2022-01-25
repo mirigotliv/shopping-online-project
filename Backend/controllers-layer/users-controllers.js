@@ -4,14 +4,12 @@ const jwt = require('jsonwebtoken')
 const SECRET_KEY = '$!Aefksn34'
 
 //Login:
-router.post("/login", async (request, response) => {
-    console.log('ccc')
-    console.log('req', request.body)
+router.post('/login', async (request, response) => {
     try {
         const email = request.body.email
         const password = request.body.password
         const status = await usersLogic.login(email, password);
-        console.log('xxx')
+        // if the login failed, so return error message:
         if (status !== 200) {
             response.status(status).send('error login')
         } else {
@@ -25,15 +23,12 @@ router.post("/login", async (request, response) => {
         }
     }
     catch (err) {
-        console.log(err)
         response.status(500).send(err.message);
     }
 });
 
-// register:
-router.post("/register", (request, response) => {
+router.post('/register', (request, response) => {
     usersLogic.register(request, response)
-    console.log('request.body', request.body)
 })
 
 module.exports = router
