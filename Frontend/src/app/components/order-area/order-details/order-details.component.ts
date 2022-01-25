@@ -15,25 +15,24 @@ import { environment } from 'src/environments/environment';
 })
 
 export class OrderDetailsComponent implements OnInit {
-    street: string
     city: string
+    street: string
     shippingDate: Date
     creditCard: number
-    detailsForm: FormGroup;
     submitted = false;
     today = new Date()
     now: Date;
+    cities: CityModel[];
+    detailsForm: FormGroup;
 
-    constructor(private formBuilder: FormBuilder,
+    constructor(
+        private formBuilder: FormBuilder,
         private http: HttpClient,
         private router: Router
     ) { }
 
-    cities: CityModel[];
-
     async ngOnInit() {
         this.cities = await this.http.get<CityModel[]>(environment.citiesUrl).toPromise()
-        // display message-check if all the fields in the form are full:
         this.detailsForm = this.formBuilder.group({
             city: ['', [Validators.required, Validators.minLength(5)]],
             street: ['', [Validators.required, Validators.minLength(5)]],
@@ -42,13 +41,14 @@ export class OrderDetailsComponent implements OnInit {
         }, {
             validator: MustMatch('city', 'street', 'shippingDate', 'creditCard')
         });
-        // possibility for the user to select a date 'from today'
-        //  and not an expired date on the schedule:
         const dateSchedule = new DatePipe('en-Us');
         this.now = dateSchedule.transform(new Date(), 'yyyy-MM-dd');
     }
 
-    // function for getting the list of all the cities in the select box:
+    get form() {
+        return this.detailsForm.controls;
+    }
+
     public async getCities(args: Event) {
         try {
             this.cities = await this.http.get<CityModel[]>(environment.citiesUrl).toPromise();
@@ -59,22 +59,16 @@ export class OrderDetailsComponent implements OnInit {
         }
     }
 
-    // convenience getter for easy access to form fields
-    get form() { return this.detailsForm.controls; }
+    onSubmit() {
+        this.submitted = true;
+    }
 
-    // function to check fields when the user click on the button "Order" in the form
     public checkDetailsForm() {
-        // this.submitted = true;
         if (this.detailsForm.valid) {
             this.router.navigateByUrl("/reception");
         }
         else {
             return
         }
-    }
-
-    // function to submit data:
-    onSubmit() {
-        this.submitted = true;
     }
 }

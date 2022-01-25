@@ -5,22 +5,21 @@
       <p class="registerPassage">
          Registered?
       </p>
-
     <!-- email div- with label, input, and messages to user: -->
-    <div class="form-group">
+    <div>
         <label class="emailLabel"> Username: </label>
         <input
               class="emailInput"
-              #email type="text"
+              #email
+              type="text"
               name="username"
               required 
               autofocus
-              placeholder="username"
+              placeholder="email"
               pattern="^(\w|\W)+@\w+\.(\w|\.)+$"
               formControlName="email"
               class="form-control"
               [ngClass]="{ 'is-invalid': submitted && form.email.errors }">
-            
             <!-- div for display error to user when he enters wrong data in email input -->
         <div
             *ngIf="submitted && form.email.errors"
@@ -35,25 +34,22 @@
                 email must be at least 11 characters
         </span>
             <!-- third message: -->
-        <div
+        <span
             id="invalidEmailMessage"
             *ngIf="form.email.errors"
         >
             invalid email (check- email with @ , totally 11 characters)
-        </div>
+        </span>
         </div>
 </div>
-
         <!-- password div- with label, input, and messages to user: -->
-        <div
-            id="passwordDiv"
-            class="form-group">
-          <label 
-                class="passwordLabel"
+        <div id="passwordDiv"
+        >
+          <label class="passwordLabel"
           >
                 Password:
           </label>
-            <div id="visibilityDiv">
+            <div id="visibilityIcon">
              <input
                    [type]="passwordType"
                    class="passwordInput"
@@ -67,16 +63,15 @@
                    class="form-control"
                    [ngClass]="{ 'is-invalid': submitted && form.password.errors }"
              >
-            <!-- "eye" icon -helping to user see the password value: -->
-             <span 
+              <span 
                 class="material-icons"
                 visibility
                 (click)="togglePassword()"
              >
                 visibility
-             </span>
-            </div>
-          <!-- div for display error to user when he enters wrong data in email input -->
+             </span> 
+            </div> 
+          <!-- display error- when the user enters wrong data in email input: -->
             <div
                 *ngIf="submitted && form.password.errors"
                 class="invalid-feedback"
@@ -95,13 +90,11 @@
                 </span>
             </div>
         </div>
-
         <!-- message error to user-"incorrect email"
                  or "incorrect password" -->
        <div class="wrongMessage">
              {{wrongMessage}}
         </div>
-
         <div>
             <!-- "Login" button- to pass to "shopping" page -->
             <button
@@ -110,8 +103,6 @@
             >
                 Login
             </button>
-
-            {{form.message}}
             <a class="linkToRegister"
                routerLink="/register"
             >
@@ -119,10 +110,5 @@
             </a>
         </div>
     </form>
-
-      <!-- component about us- explain "Why you should buy in our store"? -->
       <app-about-us></app-about-us>
-      
-      <!-- component total-quantity- describe number
-           of products the users purchased until now: -->
       <app-total-quantity></app-total-quantity>

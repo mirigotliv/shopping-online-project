@@ -1,18 +1,17 @@
-
-/* .mainDiv {
+.search {
     display: flex;
-    white-space: nowrap;
     font-size: 20px;
-    margin-top: 10px;
     margin-left: 34px;
-} */
+    margin-top: 10px;
+    white-space: nowrap;
+} 
 
-/* input {
+input {
     height: 32px;
-    width: 18%;
     margin-left: 10px;
+    width: 16%;
 }
 
 .matIcon {
     margin-top: 5px;
-} */
+}

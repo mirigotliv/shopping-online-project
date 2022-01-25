@@ -1,11 +1,11 @@
 const UserModel = require('../models/user-model')
 const dal = require('../data-access-layer/dal')
-
 const USER_NOT_FOUND = 401
 const WRONG_PASSWORD = 402
 const SUCCESS = 200
+const USER_EXISTS = 403
 
-// get all users: 
+// get all users by their email from DB:
 async function getUserIdAsync(email) {
     let userId = -1
     await UserModel.findOne({ email }, (error, user) => {
@@ -16,35 +16,29 @@ async function getUserIdAsync(email) {
     return userId
 }
 
-//login:
 const login = async (email, password) => {
     let status = 500
-    console.log('1')
     await UserModel.findOne({ email }, (error, user) => {
-        console.log('2')
         if (!user) {
-            console.log('3')
+        // if email not exist, the status will be 401:
             status = USER_NOT_FOUND
             return
         }
+        // If the password doesn't match the password in DB
+        //  then the answer will be 402:
         else if (password !== user.password) {
-            console.log('4')
             status = WRONG_PASSWORD
         }
+        // If both the email and the password match the DB information
+        //  then the answer will be 200
         else {
-            console.log('5')
             status = SUCCESS
         }
     })
-    console.log('status', status)
     return status
 }
 
-// register:
-const register = (request, response) => {
-    console.log('register')
-    console.log(request.body)
-
+const register = async (request, response) => {
     const id = request.body.id || -1
     const email = request.body.email
     const password = request.body.password
@@ -53,56 +47,39 @@ const register = (request, response) => {
     const street = request.body.street
     const lastName = request.body.lastName
     const firstName = request.body.firstName
-    console.log('id', request.body.id)
 
-    const user = new UserModel()
-    user.id = id
-    user.email = email
-    user.password = password
-    user.passwordConfirm = passwordConfirm
-    user.cart = []
-    user.city = city
-    user.street = street
-    user.lastName = lastName
-    user.username = email
-    user.firstName = firstName
-
-    user.save((err, result) => {
-        if (err) {
-            console.log('err', err)
-            console.log("There is an error in adding user in database")
-            response.send({ success: "Failed to add user", status: 500 })
+    await UserModel.findOne({ $or: [{ id }, { email }] }, (error, user) => {
+        if (user) {
+            response.sendStatus(USER_EXISTS)
         }
-        response.send({ success: "Successfully added new user", status: 200 })
+        else {
+            // userModel to new user in the site:
+            const user = new UserModel()
+            user.id = id
+            user.email = email
+            user.password = password
+            user.passwordConfirm = passwordConfirm
+            user.cart = []
+            user.city = city
+            user.street = street
+            user.lastName = lastName
+            user.username = email
+            user.firstName = firstName
+
+            user.save((err, result) => {
+                if (err) {
+                    console.log('err', err)
+                    console.log('There is an error in adding user in database')
+                    response.send({ success: 'Failed to add user', status: 500 })
+                }
+                response.send({ success: 'Successfully added new user', status: 200 })
+            })
+        }
     })
 }
 
-// עידכון יוזר
-// function updateUser(user) {
-//     return new Promise((resolve, reject) => {
-//         user.admin ? updateAdmin(user.user) : updateCustomer(user.user)
-//         function updateAdmin(admin) {
-//             admin = new Admin(admin)
-//             admin.password = Admin.hashPassword(admin.password)
-//             Admin.findOneAndUpdate({ username: admin.username }, admin, (error, info) => {
-//                 if (error) { return reject(error) }
-//                 resolve(info)
-//             })
-//         }
-
-//עדכון לקוח
-//     function updateCustomer(customer) {
-//         Customer.replaceOne({ _id: customer._id }, customer, (error, info) => {
-//             if (error) { return reject(error) }
-//             resolve(info)
-//         })
-//     }
-// })
-
-
 module.exports = {
+    getUserIdAsync,
     login,
     register,
-    // updateUser,
-    getUserIdAsync
 }

@@ -1,47 +1,47 @@
 .mainDiv {
-    display: flex;
+    display: grid;
+    grid-template-columns: 30% 70%;
+    width: 95%;
+    grid-column-gap: 31px;
 }
 
 input {
-    height: 32px;
-    width: 16%;
-    margin-left: 10px;
     border: 3px solid blue;
+    height: 32px;
+    margin-left: 10px;
+    width: 16%;
 }
-
-/* .matIcon {
-    margin-top: 5px;
-} */
 
 .searchProductDiv {
     display: flex;
-    white-space: nowrap;
     font-size: 20px;
-    margin-top: 10px;
     margin-left: 34px;
+    margin-top: 10px;
+    white-space: nowrap;
 }
 
 .divProducts {
     border: 2px solid blue;
     display: inline-block;
-    height: 600px;
-    margin-left: 80px;
+    height: 100%;
+    margin-bottom: 120px;
     overflow-x: hidden;
-    overflow-y: auto;
-    width: 1000px;
+    overflow-y: auto; /* For responsiveness in reducing the shopping page */ 
+    width: 100%;
 }
 
 a, p {
     font-size: 23px;
 }
 
-a {
- margin-left: 50px;
-}
-
-.categoriesName{
+.categories{
+    align-items: center;
+    cursor: pointer;
     display: flex;
-    margin-top: 20px;
+    grid-column-gap: 7em;
+    justify-content: center;
+    margin-top: 18px;
+    width: 100%;
 }
 
 .modal{
@@ -55,33 +55,11 @@ a {
     background-color: rgb(192, 221, 255);
 }
 
-.divCounter {
-    border: 2px solid rgb(0, 140, 255);
-    font-size: 18px;
-    font-weight: bold;
-    height: 30px;
-    margin-left: 10px;
-    padding: 5px;
-    text-align: center;
-    width: 25%;
-}
-
-#divNumber{
-    display: flex;
-    margin-top: 15px;
-}
-
 h4 {
     font-size: 21px;
     font-weight: bold;
     margin-left: 30px;
     margin-top: 40px;
-    text-align: left;
-}
-
-#buttonAddNum{
-    height: 28px;
-    margin-left: 70px;
     text-align: center;
 }
 
@@ -90,20 +68,22 @@ h4 {
     width: 450px;
 }
 
-#resetMountButton {
-    color: rgb(20, 23, 220);
-    font-size: 23px;
-    margin-left: 50px;
-}
-
 #closeModalButton, #addProduct {
     color: rgb(20, 23, 220);
     font-size: 23px;
-    margin-left: 20px;
+    margin-left: 80px;
     margin-top: 45px;
     text-align: center;
 }
 
 button:hover {
     background-color: rgb(192, 221, 255);
+}
+
+.productCards {
+    display: grid;
+    grid-column-gap: 1.7em;
+    grid-template-columns: repeat(auto-fill, minmax(11em,1fr));
+    margin-left: 1.7em;
+    margin-right: 1.7em;
 }

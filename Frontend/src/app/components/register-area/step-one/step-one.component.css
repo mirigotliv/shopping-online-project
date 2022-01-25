@@ -8,7 +8,7 @@ form {
     margin-left: 40px;
 }
 
-p {
+#signIn {
     font-family: cursive;
     font-size: 25px;
     margin-left: 30px;
@@ -25,6 +25,7 @@ label {
 input {
     border: 3px solid blue;
     color: blue;
+    font-size: 20px;
     margin-top: 10px;
     width: 70%;
 }
@@ -43,6 +44,7 @@ input {
     margin-bottom: 15px;
     margin-left: 50px;
     padding: 6px;
+    margin-top: 30px;
 }
 
 .backToLogin:hover,
@@ -82,6 +84,10 @@ input::-webkit-inner-spin-button {
     margin-top: 10px;
 }
 
+#wrongMessageUser {
+    color: brown;
+    margin-top: 25px;
+}
 
 
 

@@ -1,7 +1,7 @@
 /* main div of details  */
 .mainDiv {
     border: 1px solid black;
-    height: 600px;
+    height: 650px;
     margin-bottom: 30px;
     margin-left: 80px;
     margin-top: 50px;
@@ -17,12 +17,17 @@ form {
     margin-top: 20px;
 }
 
-/* span-  "Order- Shipping Details" */
 span {
-    font-size: 20px;
+    font-size: 19px;
     height: 20px;
-    text-decoration: underline;
+    margin-left: 15px;
+}
 
+/* span- "Order- Shipping Details" */
+#shippingDetails {
+    text-decoration: underline;
+    font-weight: bold;
+    font-size: larger;
 }
 
 label {
@@ -61,6 +66,3 @@ select, input {
     font-size: large;
     width: 80%;
 }
-
-
-

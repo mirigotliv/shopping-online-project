@@ -17,16 +17,13 @@ export class FormRegisterComponent {
     id: number = -1
     password: string = ''
     passwordConfirm: string = ''
+    wrongMessageUser: string
 
     public toggleShowStep2() {
         this.showStep2 = !this.showStep2
     }
 
     constructor(private apiService: ApiService) { }
-    registerUser(user) {
-        this.apiService(user)
-    }
-
     signUp(
         {
             id,
@@ -36,16 +33,9 @@ export class FormRegisterComponent {
             city,
             firstName,
             lastName,
-            street, }
+            street,
+        }
     ) {
-        console.log('id', id);
-        console.log('email', email);
-        console.log('password', password);
-        console.log('passwordConfirm', passwordConfirm);
-        console.log('city', city);
-        console.log('street', street);
-        console.log('name', firstName);
-        console.log('lastName', lastName);
 
         fetch('http://localhost:3001/register',
             {
@@ -61,14 +51,16 @@ export class FormRegisterComponent {
                     lastName,
                     street
                 })
-            });
+            })
+            .then(response => {
+                if (response.status === 403) {
+                    this.toggleShowStep2()
+                    this.wrongMessageUser = "id or email exists"
+                }
+            })
     }
 
     onSubmit = ({ city, firstName, lastName, street }) => {
-        console.log('submit')
-        console.log(city)
-        console.log(this)
-        console.log('this.id ', this.id)
         this.signUp({
             city,
             email: this.email,
@@ -78,8 +70,7 @@ export class FormRegisterComponent {
             password: this.password,
             passwordConfirm: this.passwordConfirm,
             street,
-        }
-        )
+        })
         this.submitted = true;
     }
 
@@ -94,18 +85,13 @@ export class FormRegisterComponent {
         street: new FormControl('')
     })
 
-    checkAllValid() {
+    public checkAllValid() {
         let allValid = true
-        // console.log(typeof this.registerForm.controls)
         Object.keys(this.registerForm.controls).forEach(key => {
-            // console.log('key', this.registerForm.controls[key])
-            // console.log(this.registerForm.controls[key].status)
             if (this.registerForm.controls[key].status === 'INVALID') {
-                console.log('invalid')
                 allValid = false
             }
         })
-        console.log(allValid)
         return allValid
     }
 
@@ -115,14 +101,8 @@ export class FormRegisterComponent {
         password,
         passwordConfirm
     ) => {
-        console.log('id', id)
         this.submitted = true;
-        console.log(this.registerForm.controls)
-        // stop here if form is invalid
-        // console.log('valid')
         if (this.checkAllValid()) {
-            console.log('aaa')
-            // console.log('check', this.registerForm.value)
             this.toggleShowStep2()
         }
         this.id = id
@@ -130,5 +110,8 @@ export class FormRegisterComponent {
         this.password = password
         this.passwordConfirm = passwordConfirm
     }
-    // public bindClickNext = this.onClickNext.bind(this)
+
+    registerUser(user) {
+        this.apiService(user)
+    }
 }

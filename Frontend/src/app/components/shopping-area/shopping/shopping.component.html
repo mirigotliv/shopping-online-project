@@ -1,21 +1,16 @@
-<div class="searchProductDiv">
-    <p> Search product: </p>
-    <input
-     type="text"
-     class="form-control"
-     placeholder="Product Name"
-     name="search"
-     [(ngModel)]="searchText"
-    />
-</div>
-
+<app-search-bar
+  [onChange]="onSearchProduct"
+></app-search-bar>
 <div class="mainDiv">
-        <!-- add cart component- in sidebar: -->
-    <app-cart></app-cart>
+    <app-cart
+       [cart]="cart"
+       [onClickDelete]="onClickDelete"
+       [currentCart]="currentCart"
+       [totalPrice]="totalPrice"
+    ></app-cart>
 
-       <!-- names of categories -->
         <div class="divProducts">
-            <div class="categoriesName">
+            <div class="categories">
         <a
           *ngFor="let category of categories"
           (click)="onClickCategory(category._id)">
@@ -24,66 +19,44 @@
            </p>
         </a>
        </div>
-       
+
+       <div class="productCards">
        <!-- display cards of products: -->
          <app-product-card  
-              (click)="openModal(product._id)"
+              (click)="openModal(product._id, product.productName, product.price)"
               *ngFor="let product of productsToDisplay" [product]="product">
          </app-product-card>
+         </div>
 </div>
 
-    <!-- div that displayed when the user "click" on each card of product -->
     <div
         class="modal"
-        [ngStyle]="{'display':display}"
+        [ngStyle]="{'display':displayModal}"
     >
     <div class="modal-content">
         <h4 class="modal-title">
-          choose amount you want from this product:
+            Are you sure you want to add this product ?
         </h4>
         <button
-             type="button"
-             class="close"
-             (click)="onCloseHandled()"
+               type="button"
+               class="close"
+               (click)="onCloseModal()"
         >
         </button>
 
-        <div
-         id="divNumber"
-         >
-            <button
-             id="buttonAddNum"
-              (click)="addNum()"
-            >
-                <p>+</p>
-            </button>
-            <div
-             class="divCounter"
-             >{{count}}
-            </div>
-        </div>
-
-        <!-- button-"reset mount" -->
-        <button id="resetMountButton" (click)="reset()">
-            <p>reset mount</p>
-        </button>
-
-        <!-- button-"cancel" -->
         <button 
-             id="closeModalButton"
-             type="button"
-             (click)="onCloseHandled()"
+              id="closeModalButton"
+              type="button"
+              (click)="onCloseModal()"
         >
           cancel
         </button>
 
-        <!-- button-"add"-to add product to cart -->
         <button
-          (click)="addProductToCart()"
-          id="addProduct"
+              (click)="addProductToCart()"
+              id="addProduct"
         >
           add
         </button>
-
     </div>
 </div>

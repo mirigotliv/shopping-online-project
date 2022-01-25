@@ -10,11 +10,11 @@
 form {
     border: 3px solid red;
     display: grid;
-    width: 550px;
     height: 605px;
     justify-content: center;
     margin-bottom: 0;
     margin-left: 40px;
+    width: 550px;
 }
 
 /* "Start Shopping" - link to shopping page */
@@ -50,9 +50,9 @@ label {
 }
 
 /* style to div of email + password: */
-.form-group {
+/* .form-group {
     align-items: center;
-}
+} */
 
 /* style to div of password: */
 #passwordDiv {
@@ -82,12 +82,13 @@ input {
 .invalid-feedback {
    color: brown;
    font-size: 18px;
+   margin-left: 20px;
 }
 
 /* style to error of email: */
 #invalidEmailMessage {
     color: rgb(109, 100, 237);
-    margin-left: 12px;
+    margin-left: 4px;
 }
 
 /* style to button- "Login": */
@@ -117,16 +118,16 @@ button:hover {
 }
 
 /* style to "eye" icon and input of password together:  */
-#visibilityDiv {
+#visibilityIcon {
     display: flex;
 }
 
-/* style to "eye" icon:  */
-.material-icons {
+ /* style to "eye" icon:   */
+ .material-icons {
     margin-left: 5px;
-}
+} 
 
-.wrongMessage {
+#wrongMessage {
     color: rgb(255, 60, 0);
     font-size: 18px;
 }

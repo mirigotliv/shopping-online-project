@@ -20,8 +20,8 @@ img {
 /* passage of question:"Why you should buy in our store?": */
 .questionPassage {
     color: blue;
-    font-weight: bold;
     font-size: 30px;
+    font-weight: bold;
     margin-left: 25px;
 }
 

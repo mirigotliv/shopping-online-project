@@ -1,8 +1,13 @@
-const Order = require('../models/order-model')
+const UserModel = require('../models/user-model')
 
 // add order: 
-function addOrderAsync(order) {
-    return order.save();
+async function addOrderAsync({
+    cityName,
+    street,
+    shippingDate,
+    creditCard
+}) {
+    return { cityName, street, shippingDate, creditCard }.save();
 }
 
 module.exports = {

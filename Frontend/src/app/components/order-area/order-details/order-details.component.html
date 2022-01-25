@@ -4,7 +4,7 @@
        [formGroup]="detailsForm" 
        (ngSubmit)="onSubmit()"
     >
-        <span> Order- Shipping Details</span>
+        <span id="shippingDetails"> Order- Shipping Details</span>
         <br /> <br />
 
         <label>city</label>
@@ -19,12 +19,12 @@
             formControlName="city" 
             class="form-control"
         >
-        <!-- [ngClass]="{ 'is-invalid': submitted && form.city.errors }" -->
-
             <option value="" disabled="disabled">
                 select city
             </option>
-            <option *ngFor="let city of cities" value="{{city._id}}">
+            <option
+                   *ngFor="let city of cities"
+                    value="{{city._id}}">
                 {{city.cityName}}
             </option>
         </select>
@@ -42,15 +42,15 @@
 
         <label class="labelForm">street</label>
         <input
-          placeholder="street"
-          type="text" 
-          name="street"
-          id="street"
-          #street
-          required 
-          formControlName="street"
-          class="form-control"
-          [ngClass]="{ 'is-invalid': submitted && form.street.errors }" 
+              placeholder="street"
+              type="text" 
+              name="street"
+              id="street"
+              #street
+              required 
+              formControlName="street"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && form.street.errors }" 
         />
         <div *ngIf="submitted && form.street.errors"
              class="invalid-feedback"
@@ -67,16 +67,17 @@
             shipping date
         </label>
         <input 
-           placeholder="shipping date" 
-           type="date"
-           name="shippingDate"
-           id="shippingDate"
-           #shippingDate
-           formControlName="shippingDate"
-           class="form-control" 
-           [min]="now"
-           required="required"
-           [ngClass]="{ 'is-invalid': submitted && form.street.errors }" />
+              placeholder="shipping date" 
+              type="date"
+              name="shippingDate"
+              id="shippingDate"
+              #shippingDate
+              formControlName="shippingDate"
+              class="form-control" 
+              [min]="now"
+              required
+              [ngClass]="{ 'is-invalid': submitted && form.shippingDate.errors }"
+        />
         <div *ngIf="submitted && form.shippingDate.errors"
              class="invalid-feedback"
         >
@@ -86,32 +87,33 @@
         </div>
 
         <label class="labelForm">credit card</label>
-        <input
-            placeholder="credit card"
-            type="number" 
-            name="creditCard"
-            id="creditCard"
-            #creditCard required
-            formControlName="creditCard"
-            class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && form.street.errors }"
+         <input
+              placeholder="credit card"
+              type="number" 
+              name="creditCard"
+              id="creditCard"
+              #creditCard
+              required 
+              formControlName="creditCard"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && form.creditCard.errors }" 
         />
         <div *ngIf="submitted && form.creditCard.errors"
-              class="invalid-feedback">
+             class="invalid-feedback"
+        >
             <div *ngIf="form.creditCard.errors.required">
                 credit card is required
             </div>
             <div *ngIf="form.creditCard.errors.minlength">
-                credit card must be at least 4 characters
+                credit card must be at least 5 characters
             </div>
-
         </div>
         <br />
-            <!-- button "order" -->
-        <button type="submit" (click)="checkDetailsForm()">
+        <button
+              type="submit"
+              (click)="checkDetailsForm()"
+        >
             Order
         </button>
     </form>
-
-
 </div>
