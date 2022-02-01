@@ -18,7 +18,7 @@ async function addOrderAsync({
 
     newOrder.order = await productsLogic.getUserCartAsync(email)
 
-    newOrder.save(async (err, result) => {
+    newOrder.save(async err => {
         if (err) {
             console.log('err', err)
             console.log('There is an error in adding order in database')
@@ -27,7 +27,7 @@ async function addOrderAsync({
             await productsLogic.deleteProductCartAsync({ email, cart: {} })
         }
     })
-    return {};
+    return newOrder.order
 }
 
 module.exports = {

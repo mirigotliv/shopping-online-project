@@ -31,9 +31,12 @@
             <p>Total: ${{totalPrice}}</p>
         </div>
 
-        <a id="order" routerLink="/order">
+        <button
+           [disabled]="!cart.length"
+           class="order-button"
+           routerLink="/order"
+        >
             Order
-        </a>
-
+    </button>
     </div>
 </div>

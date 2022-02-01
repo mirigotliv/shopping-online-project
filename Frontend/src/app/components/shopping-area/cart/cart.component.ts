@@ -8,7 +8,6 @@ import { ProductModel } from 'src/app/models/product.model';
 })
 
 export class CartComponent {
-
     public products: ProductModel[];
     @Input() currentCart = {}
     //@ts-ignore
