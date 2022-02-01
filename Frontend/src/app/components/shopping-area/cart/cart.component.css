@@ -1,7 +1,8 @@
 .mainDiv {
     border: 2px solid blue;
     height: 100%;
-    margin-left: 30px;
+    margin-inline-start: 20px;
+    min-width: 260px;
     position: relative;
 }
 
@@ -19,13 +20,10 @@ hr {
 .orderLink {
     bottom: 0;
     display: flex;
-    position: absolute;
-}
-
-a {
     font-size: 20px;
     margin-left: 10px;
     margin: 30px;
+    position: absolute;
     text-decoration: underline;
 }
 
@@ -36,27 +34,23 @@ td {
 
 tr {
     color: red;
+    display: grid;
     font-size: x-large;
     font-weight: bold;
-}
-
-#productName {
-    padding-left: 20px;
-}
-
-#priceProduct {
-    padding-left: 2px;
-}
-
-#deleteProduct {
-    margin-left: 5px;
+    grid-column-gap: 0.3em;
+    grid-template-columns: 2fr 1fr 1fr;
+    justify-content: center;
 }
 
 mat-icon {
     cursor: pointer;
-    margin-left: 30px;
 }
 
 mat-icon:hover {
     color: red;
+}
+
+#order {
+    font-size: x-large;
+    margin-left: 1em;
 }

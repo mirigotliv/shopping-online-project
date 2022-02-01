@@ -1,13 +1,23 @@
+<div class="search-area">
 <app-search-bar
   [onChange]="onSearchProduct"
 ></app-search-bar>
+
+    <app-search-result
+      *ngIf="searchResult.length"
+       [searchResult]="searchResult"
+       [addProductToCart]="addProductToCart"
+    >
+    </app-search-result>
+</div>
+
 <div class="mainDiv">
     <app-cart
        [cart]="cart"
        [onClickDelete]="onClickDelete"
        [currentCart]="currentCart"
        [totalPrice]="totalPrice"
-    ></app-cart>
+    > </app-cart>
 
         <div class="divProducts">
             <div class="categories">
@@ -21,7 +31,6 @@
        </div>
 
        <div class="productCards">
-       <!-- display cards of products: -->
          <app-product-card  
               (click)="openModal(product._id, product.productName, product.price)"
               *ngFor="let product of productsToDisplay" [product]="product">

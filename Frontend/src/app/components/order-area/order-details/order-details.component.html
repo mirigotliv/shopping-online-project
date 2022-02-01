@@ -4,10 +4,15 @@
        [formGroup]="detailsForm" 
        (ngSubmit)="onSubmit()"
     >
-        <span id="shippingDetails"> Order- Shipping Details</span>
+    <a routerLink="/shopping">
+        Back to shop
+    </a>
+        <span id="shippingDetails"> 
+            Order- Shipping Details
+        </span>
         <br /> <br />
-
-        <label>city</label>
+        <!-- city field: -->
+        <label> city </label>
         <select 
             (change)="getCities($event)"
             placeholder="city"
@@ -40,7 +45,10 @@
             </div>
         </div>
 
-        <label class="labelForm">street</label>
+        <!-- street field: -->
+        <label class="labelForm">
+            street
+        </label>
         <input
               placeholder="street"
               type="text" 
@@ -63,11 +71,11 @@
             </div>
         </div>
 
+        <!-- shipping date field: -->
         <label class="labelForm">
             shipping date
         </label>
         <input 
-              placeholder="shipping date" 
               type="date"
               name="shippingDate"
               id="shippingDate"
@@ -86,34 +94,40 @@
             </div>
         </div>
 
-        <label class="labelForm">credit card</label>
-         <input
-              placeholder="credit card"
-              type="number" 
-              name="creditCard"
-              id="creditCard"
-              #creditCard
-              required 
-              formControlName="creditCard"
-              class="form-control"
-              [ngClass]="{ 'is-invalid': submitted && form.creditCard.errors }" 
-        />
-        <div *ngIf="submitted && form.creditCard.errors"
-             class="invalid-feedback"
-        >
-            <div *ngIf="form.creditCard.errors.required">
-                credit card is required
+        <!-- credit card field: -->
+        <label class="labelForm">
+            Credit Card:
+        </label>
+            <div class="divPassAndIcon">
+               <input
+                    placeholder="credit" 
+                    id="creditCard"
+                    #creditCard
+                    required
+                    formControlName="creditCard"
+                    class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && form.creditCard.errors }"
+                    ngModel
+                    name="creditCard"
+               />
             </div>
-            <div *ngIf="form.creditCard.errors.minlength">
-                credit card must be at least 5 characters
+                <div *ngIf="submitted && form.creditCard.errors" 
+                    class="invalid-feedback">
+                <div *ngIf="form.creditCard.errors.required">
+                    credit card is required
+                </div>
+                <div *ngIf="form.creditCard.errors.minLength">
+                    credit card must be at least 4 characters
+                </div>
             </div>
-        </div>
+ 
         <br />
         <button
+              [disabled]="!areFieldsFilledCorrectly()"
               type="submit"
-              (click)="checkDetailsForm()"
         >
             Order
         </button>
     </form>
+    <img src="/assets/images/shoppingCart.jpg">
 </div>

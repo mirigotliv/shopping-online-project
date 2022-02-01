@@ -30,8 +30,8 @@ const UserSchema = mongoose.Schema({
     street: {
         type: String,
         required: [true, "Missing street"],
-        minlength: [5, "street must be minimum 5 chars"],
-        maxlength: [100, "street can't exceed 100 chars"]
+        minlength: [3, "street must be minimum 3 chars"],
+        maxlength: [20, "street can't exceed 20 chars"]
     },
     firstName: {
         type: String,
@@ -42,7 +42,7 @@ const UserSchema = mongoose.Schema({
     lastName: {
         type: String,
         required: [true, "Missing last name"],
-        minlength: [3, "last name must be minimum 5 chars"],
+        minlength: [3, "last name must be minimum 3 chars"],
         maxlength: [100, "Name can't exceed 100 chars"]
     },
 }, { versionKey: false })

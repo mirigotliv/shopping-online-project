@@ -3,9 +3,6 @@ import { Injectable } from '@angular/core';
 @Injectable()
 
 export class TokenStorageService {
-
-    constructor() { }
-
     set(key: string, data: string): void {
         try {
             localStorage.setItem(key, JSON.stringify(data));

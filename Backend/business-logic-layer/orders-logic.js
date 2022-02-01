@@ -1,13 +1,33 @@
-const UserModel = require('../models/user-model')
+const OrderModel = require('../models/order-model')
+const productsLogic = require('../business-logic-layer/products-logic')
 
 // add order: 
 async function addOrderAsync({
-    cityName,
+    city,
     street,
     shippingDate,
-    creditCard
+    creditCard,
+    email
 }) {
-    return { cityName, street, shippingDate, creditCard }.save();
+    const newOrder = new OrderModel()
+    newOrder.city = city
+    newOrder.street = street
+    newOrder.shippingDate = shippingDate
+    newOrder.creditCard = creditCard
+    newOrder.email = email
+
+    newOrder.order = await productsLogic.getUserCartAsync(email)
+
+    newOrder.save(async (err, result) => {
+        if (err) {
+            console.log('err', err)
+            console.log('There is an error in adding order in database')
+        }
+        else {
+            await productsLogic.deleteProductCartAsync({ email, cart: {} })
+        }
+    })
+    return {};
 }
 
 module.exports = {

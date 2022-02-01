@@ -1,12 +1,14 @@
 //@ts-nocheck
-import { DatePipe } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CityModel } from 'src/app/models/city.model';
-import { MustMatch } from 'src/app/services/must-match.validator';
+import { HttpClient } from '@angular/common/http';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { environment } from 'src/environments/environment';
+import { MustMatch } from 'src/app/services/must-match.validator';
+import { CityModel } from 'src/app/models/city.model';
+import { DatePipe } from '@angular/common';
+
+const SUCCESS = 200
 
 @Component({
     selector: 'app-order-details',
@@ -24,6 +26,7 @@ export class OrderDetailsComponent implements OnInit {
     now: Date;
     cities: CityModel[];
     detailsForm: FormGroup;
+    // @Input() cart = []
 
     constructor(
         private formBuilder: FormBuilder,
@@ -52,23 +55,50 @@ export class OrderDetailsComponent implements OnInit {
     public async getCities(args: Event) {
         try {
             this.cities = await this.http.get<CityModel[]>(environment.citiesUrl).toPromise();
-            console.log(this.cities);
         }
         catch (err) {
             console.log(err);
         }
     }
 
-    onSubmit() {
-        this.submitted = true;
+    public areFieldsFilledCorrectly() {
+        if (!this.detailsForm.value.city ||
+            !this.detailsForm.value.street ||
+            !this.detailsForm.value.shippingDate ||
+            !this.detailsForm.value.creditCard ||
+            this.detailsForm.value.street.length < 3 ||
+            this.detailsForm.value.creditCard.length < 4
+        ) {
+            return false
+        }
+        return true
     }
 
-    public checkDetailsForm() {
-        if (this.detailsForm.valid) {
-            this.router.navigateByUrl("/reception");
+    public onSubmit() {
+        this.submitted = true;
+        if (this.areFieldsFilledCorrectly()) {
+            this.orderCart()
         }
-        else {
-            return
-        }
+    }
+
+    public orderCart() {
+        fetch('http://localhost:3001/orderCart',
+            {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    token: window.localStorage.getItem('token'),
+                    city: this.detailsForm.value.city,
+                    street: this.detailsForm.value.street,
+                    shippingDate: this.detailsForm.value.shippingDate,
+                    creditCard: this.detailsForm.value.creditCard
+                })
+            })
+            .then(response => {
+                if (response.status === SUCCESS) {
+                    
+                    this.router.navigateByUrl("/reception");
+                }
+            })
     }
 }

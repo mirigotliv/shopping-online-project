@@ -1,4 +1,4 @@
-    <div class="divStep2">
+    <div class="stepTwo">
         <form
          [formGroup]="registerForm"
          id="formData"
@@ -34,6 +34,7 @@
                 </div>
             </div>
             <br />
+
         <!-- "street" field -->
             <label class="labelStep2">Street:</label>
             <input
@@ -44,20 +45,20 @@
                 formControlName="street" 
                 class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && form.street.errors }"
-            />
+            />   
         <!-- "street" display errors -->
-            <div *ngIf="submitted && form.street.errors" class="invalid-feedback">
+             <div *ngIf="submitted && form.street.errors" class="invalid-feedback">
                 <div *ngIf="form.street.errors.required">
                     street is required
                 </div>
                 <div *ngIf="form.street.errors.minlength">
-                    street must be at least 5 characters
+                    street must be at least 3 characters
                 </div>
             </div>
             <br />
 
-        <!-- "first name" field -->
-            <label class="labelStep2"> Name:</label>
+         <!-- "first name" field --> 
+            <label class="labelStep2"> First Name:</label>
             <input 
                 placeholder="first name"
                 id="firstName"
@@ -91,16 +92,17 @@
         <!-- "last name" display errors -->
                 <div *ngIf="submitted && form.lastName.errors" class="invalid-feedback">
                 <div *ngIf="form.lastName.errors.required">
-                    lastName is required
+                    last name is required
                 </div>
                 <div *ngIf="form.lastName.errors.minlength">
-                    lastName must be at least 3 characters
+                    last name must be at least 3 characters
                 </div>
             </div>
             <br />
             <button
                 [disabled]="!areFieldsFilledCorrectly()"
                 (click)="onSubmit()"
+                routerLink="/shopping"
                 value="Register"
                 class="registerButton"
                >

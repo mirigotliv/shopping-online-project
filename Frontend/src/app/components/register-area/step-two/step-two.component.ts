@@ -16,6 +16,8 @@ import { Input } from '@angular/core';
 })
 
 export class StepTwoComponent implements OnInit {
+    registerForm: FormGroup;
+    submitted = false;
     @Input()
     onSubmit2: (Function);
     @Input()
@@ -26,9 +28,6 @@ export class StepTwoComponent implements OnInit {
     public password: string;
     @Input()
     public passwordConfirm: string;
-
-    registerForm: FormGroup;
-    submitted = false;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -49,7 +48,7 @@ export class StepTwoComponent implements OnInit {
 
         this.registerForm = this.formBuilder.group({
             city: ['', [Validators.required]],
-            street: ['', [Validators.required, Validators.minLength(5)]],
+            street: ['', [Validators.required, Validators.minLength(3)]],
             firstName: ['', [Validators.required, Validators.minLength(3)]],
             lastName: ['', [Validators.required, Validators.minLength(3)]]
         }, {
@@ -61,6 +60,9 @@ export class StepTwoComponent implements OnInit {
         if (!this.registerForm.value.city ||
             !this.registerForm.value.street ||
             !this.registerForm.value.firstName ||
+            this.registerForm.value.firstName.length < 3 ||
+            this.registerForm.value.street.length < 3 ||
+            this.registerForm.value.lastName.length < 3 ||
             !this.registerForm.value.lastName) {
             return false
         }
@@ -88,11 +90,14 @@ export class StepTwoComponent implements OnInit {
 
     registerUser() {
         new ApiService().registerUser(
-            this.email,
             this.id,
+            this.email,
             this.password,
             this.passwordConfirm,
-            city, street, firstName, lastName
+            city,
+            street,
+            firstName,
+            lastName
         )
     }
 }

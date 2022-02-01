@@ -20,17 +20,13 @@ const login = async (email, password) => {
     let status = 500
     await UserModel.findOne({ email }, (error, user) => {
         if (!user) {
-        // if email not exist, the status will be 401:
+            // if email not exist, the status will be 401:
             status = USER_NOT_FOUND
             return
         }
-        // If the password doesn't match the password in DB
-        //  then the answer will be 402:
         else if (password !== user.password) {
             status = WRONG_PASSWORD
         }
-        // If both the email and the password match the DB information
-        //  then the answer will be 200
         else {
             status = SUCCESS
         }

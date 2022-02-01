@@ -1,5 +1,4 @@
-/* style to main div of Login  */
-.mainDivLogin {
+.containerLogin {
     display: flex;
     grid-template-rows: 1fr; 
     justify-content: center;
@@ -14,7 +13,8 @@ form {
     justify-content: center;
     margin-bottom: 0;
     margin-left: 40px;
-    width: 550px;
+    margin-top: 3em;
+    width: 520px;
 }
 
 /* "Start Shopping" - link to shopping page */
@@ -41,39 +41,29 @@ form {
 label {
     color: blue;
     font-size: 23px;
+    margin-left: 25px;
+}
+
+#emailLabel {
     margin-left: 5px;
 }
 
-/* style to label of email: */
-.emailLabel {
-    margin-left: 5px;
-}
-
-/* style to div of email + password: */
-/* .form-group {
-    align-items: center;
-} */
-
-/* style to div of password: */
 #passwordDiv {
     margin-left: 0px;
 }
-
-/* style to label of password: */
 .passwordLabel {
-    margin-left: 5px;
+    margin-left: 22px;
 }
 
-/* style to input: */
 input {
     border: 3px solid blue;
     color: blue;
     font-size: 20px;
     height: 35px;
     width: 270px;
+    margin-left: 25px;
 }
 
-/* style to password input: */
 .passwordInput {
     margin-left: 4px;
 }
@@ -82,10 +72,9 @@ input {
 .invalid-feedback {
    color: brown;
    font-size: 18px;
-   margin-left: 20px;
+   margin-left: 25px;
 }
 
-/* style to error of email: */
 #invalidEmailMessage {
     color: rgb(109, 100, 237);
     margin-left: 4px;
@@ -127,7 +116,8 @@ button:hover {
     margin-left: 5px;
 } 
 
-#wrongMessage {
+.wrongMessage {
     color: rgb(255, 60, 0);
-    font-size: 18px;
+    font-size: large;
+    margin-left: 2em;
 }

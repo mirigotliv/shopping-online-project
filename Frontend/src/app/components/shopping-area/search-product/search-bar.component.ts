@@ -7,6 +7,7 @@ import { Component, Input } from '@angular/core';
 })
 
 export class SearchBarComponent {
+    
     @Input() onChange: Function
     timeOut: number = null
 

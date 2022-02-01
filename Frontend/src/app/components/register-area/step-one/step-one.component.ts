@@ -2,8 +2,6 @@
 import { Component, OnInit, Input } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MustMatch } from 'src/app/services/must-match.validator'
-import { Router } from '@angular/router'
-import { ApiService } from 'src/app/services/api.service'
 
 @Component({
     selector: 'app-step-one',
@@ -12,11 +10,12 @@ import { ApiService } from 'src/app/services/api.service'
 })
 
 export class StepOneComponent implements OnInit {
-
-    @Input() onClickNext: Function;
     passwordType: string = 'password'
     passwordShown: boolean = false
+    registerForm: FormGroup;
+    submitted = false;
     @Input wrongMessageUser: string;
+    @Input() onClickNext: Function;
 
     public togglePassword() {
         if (this.passwordShown) {
@@ -29,10 +28,10 @@ export class StepOneComponent implements OnInit {
         }
     }
 
-    registerForm: FormGroup;
-    submitted = false;
+    constructor(
+        private formBuilder: FormBuilder,
+    ) { }
 
-    constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService) { }
     ngOnInit() {
         this.registerForm = this.formBuilder.group({
             id: ['', [Validators.required, Validators.minLength(9)]],
@@ -53,8 +52,9 @@ export class StepOneComponent implements OnInit {
         if (!this.checkAllValid()) {
             return
         }
-        this.onClickNext(email.value,
+        this.onClickNext(
             id.value,
+            email.value,
             password.value,
             passwordConfirm.value
         )
