@@ -1,5 +1,4 @@
-// @ts-nocheck
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ProductModel } from 'src/app/models/product.model';
 
 @Component({
@@ -8,17 +7,12 @@ import { ProductModel } from 'src/app/models/product.model';
     styleUrls: ['./cart.component.css']
 })
 
-export class CartComponent implements OnInit {
+export class CartComponent {
 
-    @Input() currentCart = {}
-    @Input() cart = []
     public products: ProductModel[];
-    @Input onClickDelete: Function
-    @Input totalPrice: number
-
-    constructor() { }
-
-    ngOnInit(): void {
-
-    }
+    @Input() currentCart = {}
+    //@ts-ignore
+    @Input() cart = []
+    @Input() onClickDelete: Function
+    @Input() totalPrice: number
 }

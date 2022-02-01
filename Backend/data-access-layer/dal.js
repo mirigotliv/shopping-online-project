@@ -4,7 +4,7 @@ const mongoose = require("mongoose")
 function connectAsync() {
     return new Promise((resolve, reject) => {
         const options = { useNewUrlParser: true, useUnifiedTopology: true }
-        
+
         mongoose.connect(config.database.connectionString, options, (error, db) => {
             if (error) {
                 reject(error)

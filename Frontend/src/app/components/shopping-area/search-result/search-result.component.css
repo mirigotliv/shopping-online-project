@@ -1,0 +1,23 @@
+.search-results {
+    align-items: center;
+    background-color: beige;
+    border-radius: 4px;
+    border: 1px solid black;
+    display: grid;
+    font: 1.3em Arial bold;
+    grid-column-gap: 1.7em;
+    grid-template-columns: 1fr 1fr 1fr;
+    height: 3em;
+    justify-items: center;
+    margin-left: 5em;
+    width: 35em;
+    z-index: 2;
+} 
+
+.add, .remove {
+    cursor: pointer;
+}
+
+.remove:hover {
+    color: red;
+}

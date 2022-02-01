@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MustMatch } from 'src/app/services/must-match.validator';
 
 @Component({
@@ -10,12 +10,15 @@ import { MustMatch } from 'src/app/services/must-match.validator';
 })
 
 export class LoginComponent {
+
     email: string
     password: string
     passwordType: string = 'password'
     passwordShown: boolean = false
     wrongMessage: string
     emailPattern = "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+    loginForm: FormGroup;
+    submitted = false;
 
     public togglePassword() {
         if (this.passwordShown) {
@@ -29,8 +32,6 @@ export class LoginComponent {
     }
 
     onLogin(email: string, password: string) {
-        console.log('email', email);
-        console.log('password--', password);
         fetch('http://localhost:3001/login',
             {
                 method: 'POST',
@@ -41,7 +42,6 @@ export class LoginComponent {
                 if (response.status === 200) {
                     response.json()
                         .then(data => window.localStorage.setItem('token', data.token))
-                    console.log('res', response.body)
                     this.router.navigateByUrl("/shopping");
                 }
                 else {
@@ -54,10 +54,10 @@ export class LoginComponent {
             })
     }
 
-    loginForm: FormGroup;
-    submitted = false;
-
-    constructor(private formBuilder: FormBuilder, private router: Router) { }
+    constructor(
+        private formBuilder: FormBuilder,
+        private router: Router
+    ) { }
 
     ngOnInit() {
         this.loginForm = this.formBuilder.group({

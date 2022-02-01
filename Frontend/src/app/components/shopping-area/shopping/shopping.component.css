@@ -1,8 +1,8 @@
 .mainDiv {
     display: grid;
+    grid-column-gap: 31px;
     grid-template-columns: 30% 70%;
     width: 95%;
-    grid-column-gap: 31px;
 }
 
 input {
@@ -26,7 +26,7 @@ input {
     height: 100%;
     margin-bottom: 120px;
     overflow-x: hidden;
-    overflow-y: auto; /* For responsiveness in reducing the shopping page */ 
+    overflow-y: auto; 
     width: 100%;
 }
 
@@ -38,13 +38,13 @@ a, p {
     align-items: center;
     cursor: pointer;
     display: flex;
-    grid-column-gap: 7em;
+    grid-column-gap: 5em;
     justify-content: center;
     margin-top: 18px;
     width: 100%;
 }
 
-.modal{
+.modal {
     height: 800px;
     margin-left: 35%;
     margin-top: 12%;
@@ -82,8 +82,13 @@ button:hover {
 
 .productCards {
     display: grid;
-    grid-column-gap: 1.7em;
-    grid-template-columns: repeat(auto-fill, minmax(11em,1fr));
+    grid-column-gap: 2.5em;
+    grid-template-columns: repeat(auto-fill, minmax(8em,1fr));
     margin-left: 1.7em;
     margin-right: 1.7em;
+}
+
+.search-area {
+   display: flex;
+   flex-direction: column;
 }

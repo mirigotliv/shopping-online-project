@@ -2,6 +2,8 @@ const ProductModel = require('../models/product-model');
 const CategoryModel = require('../models/category-model');
 const UserModel = require('../models/user-model')
 
+const MAX_PRODUCTS_SEARCH = 20
+
 // get all categories: 
 function getAllCategoriesAsync() {
     return CategoryModel.find().exec();
@@ -69,15 +71,10 @@ async function deleteProductCartAsync({ email, cart }) {
         })
 }
 
-
-function searchProducts(value) {
-    return new Promise(async (resolve) => {
-        const products = await getAllProductsAsync()
-        const foundProducts = await products.filter(p => {
-            if (p.name.indexOf(value) >= 0) return p
-        })
-        resolve(foundProducts)
-    })
+async function searchProducts(value) {
+    return await ProductModel.find(
+        { "productName": { $regex: new RegExp('^' + value) } }
+    ).limit(MAX_PRODUCTS_SEARCH)
 }
 
 module.exports = {

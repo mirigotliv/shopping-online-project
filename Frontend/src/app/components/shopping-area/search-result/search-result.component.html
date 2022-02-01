@@ -1,0 +1,16 @@
+<div
+    class="search-results"
+    *ngFor="let product of searchResult">
+        <div>
+            {{product.productName}}
+        </div>
+        <div>
+            ${{product.price}}
+        </div>
+        <div
+           class="add"
+           (click)="addProductToCart(product)"
+        >
+            +
+        </div>    
+</div>

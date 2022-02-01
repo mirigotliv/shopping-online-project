@@ -1,17 +1,20 @@
 const mongoose = require("mongoose");
 
 const OrdersSchema = mongoose.Schema({
-    cityName: {
+    order: {
+        type: Object
+    },
+    city: {
         type: String,
         required: [true, "Missing city name"],
-        minlength: [2, "Name must be minimum 2 chars"],
-        maxlength: [100, "Name can't exceed 100 chars"]
+        minLength: [5, "city must be minimum 5 chars"],
+        maxLength: [50, "city can't exceed 50 chars"]
     },
     street: {
         type: String,
         required: [true, "Missing street"],
-        min: [0, "street can't be negative"],
-        max: [1000, "street can't exceed 1000"]
+        minLength: [5, "street must be minimum 5 chars "],
+        maxLength: [50, "street can't exceed 1000"]
     },
     shippingDate: {
         type: Date,
@@ -20,7 +23,8 @@ const OrdersSchema = mongoose.Schema({
     creditCard: {
         type: Number,
         required: [true, "Missing creditCard"],
-        min: [4, "credit card must be min 4"]
+        minLength: [4, "credit card must be minimum 4 chars"],
+        maxLength: [20, "credit card can't exceed 20 chars"]
     },
     userId: {
         type: mongoose.Schema.Types.ObjectId

@@ -1,15 +1,14 @@
-<div class="mainDivLogin">
+<div class="containerLogin">
     <form 
         [formGroup]="loginForm"
         (ngSubmit)="onSubmit()">
       <p class="registerPassage">
          Registered?
       </p>
-    <!-- email div- with label, input, and messages to user: -->
     <div>
         <label class="emailLabel"> Username: </label>
         <input
-              class="emailInput"
+              id="emailInput"
               #email
               type="text"
               name="username"
@@ -19,21 +18,19 @@
               pattern="^(\w|\W)+@\w+\.(\w|\.)+$"
               formControlName="email"
               class="form-control"
-              [ngClass]="{ 'is-invalid': submitted && form.email.errors }">
-            <!-- div for display error to user when he enters wrong data in email input -->
+              [ngClass]="{ 'is-invalid': submitted && form.email.errors }"
+        >
         <div
             *ngIf="submitted && form.email.errors"
             class="invalid-feedback"
         >
-            <!-- first message: -->
         <span *ngIf="form.email.errors.required">
                email is required
         </span>
-            <!-- second message: -->
         <span *ngIf="form.email.errors.minlength">
                 email must be at least 11 characters
         </span>
-            <!-- third message: -->
+    <br/>
         <span
             id="invalidEmailMessage"
             *ngIf="form.email.errors"
@@ -42,7 +39,6 @@
         </span>
         </div>
 </div>
-        <!-- password div- with label, input, and messages to user: -->
         <div id="passwordDiv"
         >
           <label class="passwordLabel"
@@ -71,18 +67,15 @@
                 visibility
              </span> 
             </div> 
-          <!-- display error- when the user enters wrong data in email input: -->
             <div
                 *ngIf="submitted && form.password.errors"
                 class="invalid-feedback"
             >
-            <!-- first message: -->
                 <span
                      *ngIf="form.password.errors.required"
                 >
                      password is required
                 </span>
-            <!-- second message: -->
                 <span
                      *ngIf="form.password.errors.minlength"
                 >
@@ -90,19 +83,18 @@
                 </span>
             </div>
         </div>
-        <!-- message error to user-"incorrect email"
-                 or "incorrect password" -->
        <div class="wrongMessage">
              {{wrongMessage}}
         </div>
         <div>
-            <!-- "Login" button- to pass to "shopping" page -->
+
             <button
                (click)="onLogin(email.value, password.value)"
                ng-click="controller.login(user)"
             >
                 Login
             </button>
+
             <a class="linkToRegister"
                routerLink="/register"
             >

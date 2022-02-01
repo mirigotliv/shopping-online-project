@@ -5,9 +5,3 @@ export class ProductModel {
     public categoryId: string
     public categoryName: string
 }
-
-
-
-
-
-

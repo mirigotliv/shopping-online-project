@@ -12,14 +12,13 @@ const citiesControllers = require('./controllers-layer/cities-controllers')
 // Setting Server Up
 server.use(cors({
     origin: ['http://localhost:4200'],
-    'methods': 'GET,POST,OPTIONS,DELETE,PUT',
+    'methods': 'GET, POST ,OPTIONS ,DELETE, PUT',
     'preflightContinue': false,
     'optionsSuccessStatus': 204,
     credentials: true
 }));
 
 server.use(express.json())
-server.use(require('express').static(__dirname))
 server.use(bodyParser.urlencoded({ extended: true }))
 
 server.listen(3001, () => {
@@ -27,7 +26,7 @@ server.listen(3001, () => {
     server.use('/api', productsController)
     server.get('/cities', citiesControllers)
     server.post('/register', usersControllers)
-    server.post('/orders', ordersControllers)
+    server.post('/orderCart', ordersControllers)
     server.post('/getCart', productsController)
     server.post('/getProducts', productsController)
     server.put('/deleteProductCart', productsController)

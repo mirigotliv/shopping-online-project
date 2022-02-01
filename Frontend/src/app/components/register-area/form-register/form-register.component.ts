@@ -6,7 +6,6 @@ import { ApiService } from 'src/app/services/api.service'
 @Component({
     selector: 'app-form-register',
     templateUrl: './form-register.component.html',
-    styleUrls: ['./form-register.component.css']
 })
 
 export class FormRegisterComponent {
@@ -23,8 +22,25 @@ export class FormRegisterComponent {
         this.showStep2 = !this.showStep2
     }
 
+    public onClickNext = (
+        id,
+        email,
+        password,
+        passwordConfirm
+    ) => {
+        this.submitted = true;
+        if (this.checkAllValid()) {
+            this.toggleShowStep2()
+        }
+        this.id = id
+        this.email = email
+        this.password = password
+        this.passwordConfirm = passwordConfirm
+    }
+
     constructor(private apiService: ApiService) { }
-    signUp(
+
+    public signUp(
         {
             id,
             email,
@@ -36,7 +52,6 @@ export class FormRegisterComponent {
             street,
         }
     ) {
-
         fetch('http://localhost:3001/register',
             {
                 method: 'POST',
@@ -58,6 +73,16 @@ export class FormRegisterComponent {
                     this.wrongMessageUser = "id or email exists"
                 }
             })
+    }
+
+    public checkAllValid() {
+        let allValid = true
+        Object.keys(this.registerForm.controls).forEach(key => {
+            if (this.registerForm.controls[key].status === 'INVALID') {
+                allValid = false
+            }
+        })
+        return allValid
     }
 
     onSubmit = ({ city, firstName, lastName, street }) => {
@@ -84,32 +109,6 @@ export class FormRegisterComponent {
         lastName: new FormControl(''),
         street: new FormControl('')
     })
-
-    public checkAllValid() {
-        let allValid = true
-        Object.keys(this.registerForm.controls).forEach(key => {
-            if (this.registerForm.controls[key].status === 'INVALID') {
-                allValid = false
-            }
-        })
-        return allValid
-    }
-
-    public onClickNext = (
-        email,
-        id,
-        password,
-        passwordConfirm
-    ) => {
-        this.submitted = true;
-        if (this.checkAllValid()) {
-            this.toggleShowStep2()
-        }
-        this.id = id
-        this.email = email
-        this.password = password
-        this.passwordConfirm = passwordConfirm
-    }
 
     registerUser(user) {
         this.apiService(user)

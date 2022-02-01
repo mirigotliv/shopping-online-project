@@ -1,20 +1,18 @@
-/* main div of details  */
 .mainDiv {
-    border: 1px solid black;
-    height: 650px;
-    margin-bottom: 30px;
-    margin-left: 80px;
-    margin-top: 50px;
-    width: 420px;
+    display: flex;
+    margin-left: 10em;
+    margin-top: 2em;
 }
 
-/* style of form */
 form {
-    font-size: 20px;
+    border: 1px solid black;
+    font-size: large;
+    height: 34em;
     justify-items: center;
-    margin-bottom: 30px;
-    margin-left: 20px;
-    margin-top: 20px;
+    margin-bottom: 50px;
+    margin-left: 7em;
+    padding-right: 1em;
+    width: 25em;
 }
 
 span {
@@ -25,9 +23,10 @@ span {
 
 /* span- "Order- Shipping Details" */
 #shippingDetails {
-    text-decoration: underline;
-    font-weight: bold;
     font-size: larger;
+    font-weight: bold;
+    margin-top: 10px;
+    text-decoration: underline;
 }
 
 label {
@@ -38,6 +37,7 @@ label {
 button {
     font-size: 25px;
     height: 38px;
+    margin-left: 4em;
     width: 35%;
 }
 
@@ -53,16 +53,36 @@ input {
 /* error in fill fields: */
 .invalid-feedback {
     color: brown;
+    margin-left: 3em;
 }
 
-/* disable user to enter string to input of "identify": */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
 
-/* style to select and input */
 select, input {
     font-size: large;
-    width: 80%;
+    width: 18em;
+}
+
+a {
+    display: flex;
+    font-size: large;
+    margin-left: 3em;
+    margin-top: 1.1em;
+    text-decoration: underline;
+}
+
+/* style to image- 'order.jpg' */
+ img {
+    border-radius: 25px;
+    height: 23em;
+    margin-left: 20em;
+    margin-top: 80px;
+    width: 25em;
+}
+
+label, select, input, span {
+    margin-left: 3em;
 }
