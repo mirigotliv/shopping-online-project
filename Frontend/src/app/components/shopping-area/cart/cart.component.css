@@ -50,7 +50,15 @@ mat-icon:hover {
     color: red;
 }
 
-#order {
+.order-button {
+    border-radius: 8px;
+    cursor: pointer;
     font-size: x-large;
     margin-left: 1em;
 }
+
+.order-button:enabled:hover {
+    background-color: green;
+    color: white;
+}
+

@@ -81,6 +81,14 @@ export class OrderDetailsComponent implements OnInit {
         }
     }
 
+    public downloadFile(fileText: string) {
+        const link = document.getElementById("download")
+        const file = new Blob([fileText], { type: 'text/plain' })
+        link.href = URL.createObjectURL(file)
+        link.download = 'order.txt'
+        link.click()
+    }
+
     public orderCart() {
         fetch('http://localhost:3001/orderCart',
             {
@@ -96,8 +104,17 @@ export class OrderDetailsComponent implements OnInit {
             })
             .then(response => {
                 if (response.status === SUCCESS) {
-                    
-                    this.router.navigateByUrl("/reception");
+                    response.json().then(cart => {
+                        let orderDetails = ''
+                        let totalPrice = 0
+                        Object.values(cart).forEach(product => {
+                            totalPrice += product.price
+                            orderDetails += `${product.productName}: $${product.price}\n`
+                        })
+                        orderDetails += `\n\n total: $${totalPrice}`
+                        this.downloadFile(orderDetails)
+                        this.router.navigateByUrl("/reception");
+                    })
                 }
             })
     }

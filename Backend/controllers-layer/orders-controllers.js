@@ -16,15 +16,15 @@ router.post("/orderCart", async (request, response) => {
             const shippingDate = request.body.shippingDate;
             const creditCard = request.body.creditCard;
             const email = decodedToken.email;
-            const emptyCart = await ordersLogic.addOrderAsync({
+            const cart = await ordersLogic.addOrderAsync({
                 email,
                 city,
                 street,
                 shippingDate,
                 creditCard,
                 cartId
-            });
-            response.status(200).json(emptyCart);
+            }) || {}
+            response.status(200).json(cart)
         }
     });
 });
